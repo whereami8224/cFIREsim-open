@@ -171,24 +171,12 @@
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<?php
-						//Start Login Code. Unnecessary for standalone app
-								if(!($user->data['is_registered'])){
-									echo "<li><button type='button' class='btn btn-default navbar-btn' id='signInBtn'><img src='http://www.cfiresim.com/phpBB3/styles/prosilver/theme/images/icon_logout.gif'>Sign in</button></li>";
-								}else {
-									echo "<p class='navbar-text'>Logged in as [ <font color='red'><b id='username'>" . $user->data['username'] . " </b></font>]</p>";
-									echo '<li><p class="navbar-btn btn btn-default"><img src="http://www.cfiresim.com/phpBB3/styles/prosilver/theme/images/icon_logout.gif"><a href="http://www.cfiresim.com/phpBB3/ucp.php?mode=logout&sid=' . $user->session_id . '">Sign Out</a></p></li>';
-									echo '<li><button type="button" class="btn btn-default navbar-btn" id="saveSimBtn">Save Simulation Inputs</button></li>';
-									echo '<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load Saved Sim <span class="caret"></span></a>
-										<ul class="dropdown-menu" id="savedSimsDropdown">
-										</ul>
-									</li>';
-
-								}
-								//End Login Code
-						?>
+					<ul class="nav navbar-nav">	
+					<li><button type="button" class="btn btn-default navbar-btn" id="saveSimBtn">Save Simulation Inputs</button></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load Saved Sim <span class="caret"></span></a>
+						<ul class="dropdown-menu" id="savedSimsDropdown"></ul>
+					</li>;
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
