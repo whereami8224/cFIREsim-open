@@ -1,8 +1,3 @@
-<?php
-	include 'headers.php';
-	error_reporting(0);
-
-?>
 <!DOCTYPE html>
 <html lang="en" ng-app="cFIREsim">
 	<head>
@@ -98,10 +93,6 @@
 		<div class="page-header">
 			<h1 class="text-center">The Crowdsourced FIRE Simulator (cFIREsim) - Open Source</h1>
 		</div>
-		<div class="ot_banner">
-			<p>cFIREsim and OnTrajectory.com are teaming up to create a "financial life planning tool". </p>
-			<p><b><a href="http://www.ontrajectory.com">Come check us out!</a></b></p>
-		</div>
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -116,28 +107,17 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<?php
-						//Start Login Code. Unnecessary for standalone app
-								if(!($user->data['is_registered'])){
-									echo "<li><button type='button' class='btn btn-default navbar-btn' id='signInBtn'><img src='http://www.cfiresim.com/phpBB3/styles/prosilver/theme/images/icon_logout.gif'>Sign in</button></li>";
-								}else {
-									echo "<p class='navbar-text'>Logged in as [ <font color='red'><b id='username'>" . $user->data['username'] . " </b></font>]</p>";
-									echo '<li><p class="navbar-btn btn btn-default"><img src="http://www.cfiresim.com/phpBB3/styles/prosilver/theme/images/icon_logout.gif"><a href="http://www.cfiresim.com/phpBB3/ucp.php?mode=logout&sid=' . $user->session_id . '">Sign Out</a></p></li>';
-									echo '<li><button type="button" class="btn btn-default navbar-btn" id="saveSimBtn">Save Simulation Inputs</button></li>';
-									echo '<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load Saved Sim <span class="caret"></span></a>
-										<ul class="dropdown-menu" id="savedSimsDropdown">
-										</ul>
-									</li>';
-
-								}
-								//End Login Code
-						?>
+						<li><button type="button" class="btn btn-default navbar-btn" id="saveSimBtn">Save Simulation Inputs</button></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load Saved Sim <span class="caret"></span></a>
+							<ul class="dropdown-menu" id="savedSimsDropdown">
+							</ul>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
 							<p class="navbar-btn">
-								<a href="faq.php" class="btn btn-default">FAQ/Tutorial</a>
+								<a href="faq.html" class="btn btn-default">FAQ/Tutorial</a>
 							</p>
 						</li>
 						<li>
@@ -150,11 +130,6 @@
 								<a href="phpBB3/index.php" class="btn btn-default">cFIREsim Forums</a>
 							</p>
 						</li>
-						<!--<li>
-							<p class="navbar-btn">
-								<a data-toggle="modal" href="#" class="btn btn-default" id="tutorialBtn">Tutorial</a>
-							</p>
-						</li>-->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blogs/Forums <span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -299,20 +274,3 @@
 			</div>
 	</body>
 </html>
-
-<script type="text/javascript">
-  <?php echo 'var session = "'.json_encode($_SESSION['msg']).'";'; ?>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-42984907-1', 'auto');
-  ga('send', 'pageview');
-
-	var loadedByID = Simulation.getUrlVars(["id"]);
-	if (Number.isInteger(loadedByID)){
-		Simulation.getSavedSim(loadedByID);
-	}
-  
-</script>
