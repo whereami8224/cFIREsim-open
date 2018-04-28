@@ -213,17 +213,7 @@
 								</div>
 								<label>Retirement Year:<input type="text" class="form-control toot" ng-model="data.retirementStartYear" id="retirementStartYear"></label>
 								<label>Retirement End Year:<input type="text" class="form-control" ng-model="data.retirementEndYear" id="retirementEndYear"></label>
-
-								<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 								<!-- cFIREsim Open -->
-								<ins class="adsbygoogle"
-								     style="display:block"
-								     data-ad-client="ca-pub-5980092593965662"
-								     data-ad-slot="3095196591"
-								     data-ad-format="auto"></ins>
-								<script>
-								(adsbygoogle = window.adsbygoogle || []).push({});
-								</script>
 							</div>
 						</div>
 
@@ -1082,21 +1072,6 @@
 								<div style="margin:15px">
 									<div id='graph1' style='width:800px; height:400px;background:white;' class='output'></div>
 									<div id='labels1' style='background:white;width:800px;height:20px;' class='output'></div>
-									<div class="ot_banner_output">
-										<p>cFIREsim and OnTrajectory.com are teaming up to create a "financial life planning tool". </p>
-										<p><b><a href="http://www.ontrajectory.com">Come check us out!</a></b></p>
-									</div>
-									<div>
-										<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-										<!-- cFIREsim-open Leaderboard -->
-										<ins class="adsbygoogle"
-										     style="display:inline-block;width:728px;height:90px"
-										     data-ad-client="ca-pub-5980092593965662"
-										     data-ad-slot="2988961795"></ins>
-										<script>
-										(adsbygoogle = window.adsbygoogle || []).push({});
-										</script>
-									</div>
 									<div id='graph1b' style='width:800px; height:400px;background:white;' class='output'></div>
 									<div id='labels1b' style='background:white;width:800px;height:20px;' class='output'></div>
 									<div id='download1'></div>
