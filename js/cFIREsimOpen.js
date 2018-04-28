@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    //Launch Welcome Modal
-    $('#welcomeModal').modal('show');
     
 	//Full-screen modals	
     $('#outputModal').on('shown.bs.modal', function () {

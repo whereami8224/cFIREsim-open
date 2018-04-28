@@ -110,53 +110,8 @@
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs/dt-1.10.8/datatables.min.css"/>
 	</head>
 	<body>
-		<!-- Welcome Modal -->
-		<div class="modal fade" id="welcomeModal" tabindex="" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Welcome to the cFIREsim Open Project</h4>
-					</div>
-					<div class="modal-body">
-						<p class="alert alert-success">
-							 3-28-2016 - Finally started adding a FAQ/Tutorial to the site. This can be found here: <a href="faq.php">FAQ/Tutorial</a>. For now, it includes basic tutorial explanations, along with the explanations of the spending plans, but will include more information soon.
-						</p>
-						<p class="alert alert-info">
-							 1-25-2016 - Teaming up with <a href="http://www.ontrajectory.com">OnTrajectory.com</a> to provide users with a full "financial life planning tool"
-						</p>
-						
-						<p>
-							The cFIREsim Open Project is a completely rebuilt version of cFIREsim with efficiency and transparaceny in mind. Currently not <b>all</b> of the cFIREsim legacy capabilities exist here, but you can access the <a href="http://gator3089.hostgator.com/~boknows/input.php">old site</a> until they do.
-						</p>
-						<p>
-							All of the code for cFIREsim Open is located in the <a href="https://github.com/boknows/cFIREsim-open">GitHub Repo</a>. Feel free to contribute new ideas, or <a href="https://github.com/boknows/cFIREsim-open/issues">report any issues you might find.</a>
-						</p>
-						<p>
-							All of the current issues and enhancement requests are listsed on <a href="https://github.com/boknows/cFIREsim-open/issues">the GitHub Issues Page</a>. The list of backlogged issues and the list of issues I'm currently working on can be found <a href="https://trello.com/b/traCS117/cfiresim-open">on my Trello board.</a>
-						</p>
-						<p>
-							I hope that you enjoy the new format, and I look forward to bringing new things to cFIREsim.
-						</p>
-						<p>
-							-Bo
-						</p>
-						<p class="alert alert-danger">
-							 Any issues? <a href="mailto:cfiresim@gmail.com">Email me</a>.
-						</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-		  </div>
-		</div>
 		<div class="page-header">
 			<h1 class="text-center">The Crowdsourced FIRE Simulator (cFIREsim) - Open Source</h1>
-		</div>
-		<div class="ot_banner">
-			<p>cFIREsim and OnTrajectory.com are teaming up to create a "financial life planning tool". </p>
-			<p><b><a href="http://www.ontrajectory.com">Come check us out!</a></b></p>
 		</div>
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
