@@ -1474,7 +1474,7 @@
         .controller('simulationInputController', ['$scope',
             function ($scope) {
                 $scope.data = {
-                    retirementStartYear: 2016,
+                    retirementStartYear: new Date().getFullYear(),
                     retirementEndYear: 2045,
                     data: {
                         method: "historicalAll",
