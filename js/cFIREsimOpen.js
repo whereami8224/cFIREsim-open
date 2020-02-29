@@ -303,8 +303,8 @@ var Simulation = {
     		"gold": null,
     		"cash": null
     	};
-    	if(form.portfolio.rebalanceAnnually == true){
-    		if(form.portfolio.constantAllocation == true){
+		if(form.portfolio.rebalanceAnnually > 0){ //anything form of rebalance
+			if(form.portfolio.rebalanceAnnually == 1){ //constant
 	    		ret.equities = form.portfolio.percentEquities / 100;
 	    		ret.bonds = form.portfolio.percentBonds / 100;
 	    		ret.gold = form.portfolio.percentGold / 100;
@@ -337,7 +337,7 @@ var Simulation = {
 		    		ret.cash = form.portfolio.targetPercentCash / 100;
     			}
     		}
-    	}else{
+		}else{ //no rebalance
     		if(j>0){
 	    		var prev = j - 1;
 	    		ret.equities = this.sim[i][prev].equities.end / this.sim[i][prev].portfolio.end;
@@ -397,7 +397,7 @@ var Simulation = {
         this.sim[i][j].cash.end = this.roundTwoDecimals(this.sim[i][j].cash.start + this.sim[i][j].cash.growth);
     },
     calcEndPortfolio: function(form, i, j) {
-        if (form.portfolio.rebalanceAnnually == true) {
+        if (form.portfolio.rebalanceAnnually > 0) {
             var feesIncurred = this.roundTwoDecimals((this.sim[i][j].portfolio.start + this.sim[i][j].equities.growth + this.sim[i][j].bonds.growth + this.sim[i][j].cash.growth + this.sim[i][j].gold.growth) * (form.portfolio.percentFees / 100));
             this.sim[i][j].portfolio.fees = feesIncurred;
 
