@@ -399,7 +399,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <!--div class="form-group">
                                         <label>
                                             Keep Allocation Constant:
                                             <select class="form-control"
@@ -407,7 +407,7 @@
                                                     ng-change="refreshConstantAllocationOptions()"
                                                     ng-options="constantAllocationOptions.value as constantAllocationOptions.text for constantAllocationOptions in constantAllocationOptionsTypes"></select>
                                         </label>
-                                    </div>
+                                    </div-->
                                 </div>
                             </div>
                             <div class="panel panel-default" id="targetAssets" style="display:none">
@@ -1495,7 +1495,7 @@
                         percentCash: 0,
                         percentFees: 0.18,
                         growthOfCash: 0.25,
-                        rebalanceAnnually: true,
+                        rebalanceAnnually: 1,
                         constantAllocation: true,
                         changeAllocationStartYear: 2025,
                         changeAllocationEndYear: 2030,
@@ -1642,12 +1642,16 @@
                     ]
                 }]
                 $scope.rebalanceAnnuallyOptionsTypes = [{
-                    text: 'Yes',
-                    value: true
+                    text: 'None',
+                    value: 0
                 },
                 {
-                    text: 'No',
-                    value: false
+                    text: 'Constant',
+                    value: 1
+                },
+                {
+                    text: 'Glidepath',
+                    value: 2
                 }]
                 $scope.constantAllocationOptionsTypes = [{
                     text: 'Yes',
@@ -1881,24 +1885,10 @@
                     // $scope.data =
                     //Load from JSON
                 }
-                // TODO: Could these 2 be turned into declarative Angular statements?
                 $scope.refreshRebalanceAnnuallyOptions = function () {
-                    if ($scope.data.portfolio.rebalanceAnnually == false) {
-                        $('select[ng-model="data.portfolio.constantAllocation"]').attr('disabled', true);
-                        $('select[ng-model="data.portfolio.constantAllocation"]').val("0");
-                    } else {
-                        $('select[ng-model="data.portfolio.constantAllocation"]').attr('disabled', false);
-                        $('select[ng-model="data.portfolio.constantAllocation"]').val("0");
-                    }
-                }
-                $scope.refreshConstantAllocationOptions = function () {
-                    if ($scope.data.portfolio.constantAllocation == false) {
-                        $('select[ng-model="data.portfolio.rebalanceAnnually"]').attr('disabled', true);
-                        $('select[ng-model="data.portfolio.rebalanceAnnually"]').val("0");
+                    if ($scope.data.portfolio.rebalanceAnnually == 2) {
                         $('#targetAssets').show();
                     } else {
-                        $('select[ng-model="data.portfolio.rebalanceAnnually"]').attr('disabled', false);
-                        $('select[ng-model="data.portfolio.rebalanceAnnually"]').val("0");
                         $('#targetAssets').hide();
                     }
                 }
