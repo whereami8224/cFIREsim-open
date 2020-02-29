@@ -398,17 +398,6 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <!--div class="form-group">
-                                        <label>
-                                            Keep Allocation Constant:
-                                            <select class="form-control"
-                                                    ng-model="data.portfolio.constantAllocation"
-                                                    ng-change="refreshConstantAllocationOptions()"
-                                                    ng-options="constantAllocationOptions.value as constantAllocationOptions.text for constantAllocationOptions in constantAllocationOptionsTypes"></select>
-                                        </label>
-                                    </div-->
-                                </div>
                             </div>
                             <div class="panel panel-default" id="targetAssets" style="display:none">
                                 <div class="panel-heading">
@@ -1496,7 +1485,6 @@
                         percentFees: 0.18,
                         growthOfCash: 0.25,
                         rebalanceAnnually: 1,
-                        constantAllocation: true,
                         changeAllocationStartYear: 2025,
                         changeAllocationEndYear: 2030,
                         targetPercentEquities: 100,
@@ -1652,14 +1640,6 @@
                 {
                     text: 'Glidepath',
                     value: 2
-                }]
-                $scope.constantAllocationOptionsTypes = [{
-                    text: 'Yes',
-                    value: true
-                },
-                {
-                    text: 'No',
-                    value: false
                 }]
                 $scope.spendingPlanTypes = [{
                     text: 'Inflation Adjusted',
