@@ -303,13 +303,28 @@ var Simulation = {
     		"gold": null,
     		"cash": null
     	};
-		if(form.portfolio.rebalanceAnnually > 0){ //anything form of rebalance
-			if(form.portfolio.rebalanceAnnually == 1){ //constant
+        switch(form.portfolio.rebalanceAnnually){
+            case 0: //no rebalance
+                if(j>0){
+                    var prev = j - 1;
+                    ret.equities = this.sim[i][prev].equities.end / this.sim[i][prev].portfolio.end;
+                    ret.bonds = this.sim[i][prev].bonds.end / this.sim[i][prev].portfolio.end;
+                    ret.gold = this.sim[i][prev].gold.end / this.sim[i][prev].portfolio.end;
+                    ret.cash = this.sim[i][prev].cash.end / this.sim[i][prev].portfolio.end;
+                }else{
+                    ret.equities = form.portfolio.percentEquities / 100;
+                    ret.bonds = form.portfolio.percentBonds / 100;
+                    ret.gold = form.portfolio.percentGold / 100;
+                    ret.cash = form.portfolio.percentCash / 100;
+                }
+                break;
+            case 1: //constant
 	    		ret.equities = form.portfolio.percentEquities / 100;
 	    		ret.bonds = form.portfolio.percentBonds / 100;
 	    		ret.gold = form.portfolio.percentGold / 100;
 	    		ret.cash = form.portfolio.percentCash / 100;
-    		}else{//Glide path logic
+                break;
+            case 2: //Glide path logic
     			var currentYear = new Date().getFullYear();
     			var range = {
     				"start": (form.portfolio.changeAllocationStartYear - currentYear),
@@ -336,21 +351,7 @@ var Simulation = {
 		    		ret.gold = form.portfolio.targetPercentGold / 100;
 		    		ret.cash = form.portfolio.targetPercentCash / 100;
     			}
-    		}
-		}else{ //no rebalance
-    		if(j>0){
-	    		var prev = j - 1;
-	    		ret.equities = this.sim[i][prev].equities.end / this.sim[i][prev].portfolio.end;
-	    		ret.bonds = this.sim[i][prev].bonds.end / this.sim[i][prev].portfolio.end;
-	    		ret.gold = this.sim[i][prev].gold.end / this.sim[i][prev].portfolio.end;
-	    		ret.cash = this.sim[i][prev].cash.end / this.sim[i][prev].portfolio.end;
-    		}else{
-    			ret.equities = form.portfolio.percentEquities / 100;
-	    		ret.bonds = form.portfolio.percentBonds / 100;
-	    		ret.gold = form.portfolio.percentGold / 100;
-	    		ret.cash = form.portfolio.percentCash / 100;
-    		}
-    	}
+        }
     	return ret;
     },
     calcMarketGains: function(form, i, j) {
