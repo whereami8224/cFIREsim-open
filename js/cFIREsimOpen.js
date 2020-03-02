@@ -47,31 +47,6 @@ $(document).ready(function() {
 		window.location.href = "../phpBB3/login.php";
 	});
 
-	$("#tutorialBtn").click(function(e) {
-		e.stopImmediatePropagation();
-		var tour = new Tour({
-			steps: [{
-				title: "How to use cFIREsim",
-				content: "Scenario: A married couple, age 45, have an expected 10 years left until retirement. \nThey intend to spend $35,000/yr in retirement. They currently have $500,000 in their portfolio, and intend to save $18,000/yr in their 401k\n and $5500/yr in their Traditional IRA before retiring. They will pay for 4 years of college for their child, starting in 2027. ",
-				orphan: true,
-			}, {
-				element: "#retirementStartYear",
-				title: "Retirement Start Year",
-				content: "Do it!"
-			}, {
-				element: "#retirementEndYear",
-				title: "Retirement End Year",
-				content: "Do more!"
-			}]
-		});
-
-		// Initialize the tour
-		tour.init();
-
-		// Start the tour
-		tour.start();
-	});
-
 });
 
 var Simulation = {
