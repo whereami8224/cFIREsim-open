@@ -503,7 +503,7 @@ var Simulation = {
 				if ((max - min) > .5) {
 					continue;
 				} else {
-					var html = "<b>Investigate Maximum Initial Spending</b>: Considering all other inputs, the maximum intiial spending would be <b style='color:#AAFF69'>" + accounting.formatMoney(Math.floor(mid), "$", 0) + "</b>.";
+					var html = "<b>Investigate Maximum Initial Spending</b>: Considering all other inputs, the maximum initial spending would be <b style='color:#AAFF69'>" + accounting.formatMoney(Math.floor(mid), "$", 0) + "</b>.";
 					//Run post-simulation functions
 					this.convertToCSV(this.sim);
 					this.calcFailures(this.sim);
