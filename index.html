@@ -377,7 +377,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>
-                                            Rebalance Annually:
+                                            Annual Rebalancing Strategy:
                                             <select class="form-control"
                                                     ng-model="data.portfolio.rebalanceAnnually"
                                                     ng-change="refreshRebalanceAnnuallyOptions()"
@@ -1627,6 +1627,14 @@
                 {
                     text: 'Glidepath',
                     value: 2
+                },
+                {
+                    text: 'Bonds First',
+                    value: 3
+                },
+                {
+                    text: 'OmegaNot',
+                    value: 4
                 }]
                 $scope.spendingPlanTypes = [{
                     text: 'Inflation Adjusted',
