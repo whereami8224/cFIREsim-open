@@ -326,7 +326,75 @@ var Simulation = {
 					ret.cash = form.portfolio.targetPercentCash / 100;
 				}
 				break;
-			case 3: //Al's experiment
+			case 3: //Bonds First (Cash>Gold>Bonds>Equities)
+				if (j>0){
+					var prev = j - 1;
+					var pot = {
+						'equities': this.sim[i][prev].equities.end,
+						'bonds': this.sim[i][prev].bonds.end,
+						'gold': this.sim[i][prev].gold.end,
+						'cash': this.sim[i][prev].cash.end
+					}
+					var change = this.sim[i][j].sumOfAdjustments - this.sim[i][j].spending
+					pot.cash = pot.cash + change
+					if (pot.cash < 0){
+						pot.gold = pot.gold + pot.cash
+						pot.cash = 0
+					}
+					if (pot.gold < 0){
+						pot.bonds = pot.bonds + pot.gold
+						pot.gold = 0
+					}
+					if (pot.bonds < 0){
+						pot.equities = pot.equities + pot.bonds
+						pot.bonds = 0
+					}
+					ret.equities = pot.equities / (this.sim[i][j].portfolio.start);
+					ret.bonds = pot.bonds / (this.sim[i][j].portfolio.start);
+					ret.gold = pot.gold / (this.sim[i][j].portfolio.start);
+					ret.cash = pot.cash / (this.sim[i][j].portfolio.start);
+				} else {
+					ret.equities = form.portfolio.percentEquities / 100;
+					ret.bonds = form.portfolio.percentBonds / 100;
+					ret.gold = form.portfolio.percentGold / 100;
+					ret.cash = form.portfolio.percentCash / 100;
+				}
+				break;
+			case 4: //OmegaNot
+				if (j>0){
+					var prev = j - 1;
+					var targetvalues = {
+						"equities": this.sim[i][j].cumulativeInflation* form.portfolio.initial * form.portfolio.percentEquities / 100,
+						"safe": this.sim[i][j].cumulativeInflation* form.portfolio.initial * (100-form.portfolio.percentEquities) / 100,
+					};
+					var currentequities
+					var totalsafe = this.sim[i][prev].bonds.end + this.sim[i][prev].gold.end + this.sim[i][prev].cash.end
+					if (this.sim[i][prev].equities.end > targetvalues.equities){ // equities are doing well
+						// remove spending from equities
+						currentequities = this.sim[i][prev].equities.end - this.sim[i][j].spending + this.sim[i][j].sumOfAdjustments
+					} else { // equities are doing poorly
+						// leave equities alone
+						currentequities = this.sim[i][prev].equities.end
+						// remove spending from other assets
+						totalsafe = totalsafe  - this.sim[i][j].spending + this.sim[i][j].sumOfAdjustments
+						if (totalsafe < 0){
+							// ran out of safe assets, need to spend equities anyway.
+							currentequities = currentequities + totalsafe
+							totalsafe = 0
+						}
+					}
+					ret.equities = currentequities / this.sim[i][j].portfolio.start;
+					ret.bonds = totalsafe * form.portfolio.percentBonds / (this.sim[i][j].portfolio.start * (100- form.portfolio.percentEquities));
+					ret.gold = totalsafe * form.portfolio.percentGold / (this.sim[i][j].portfolio.start * (100- form.portfolio.percentEquities));
+					ret.cash = totalsafe * form.portfolio.percentCash / (this.sim[i][j].portfolio.start * (100- form.portfolio.percentEquities));
+				} else {
+					ret.equities = form.portfolio.percentEquities / 100;
+					ret.bonds = form.portfolio.percentBonds / 100;
+					ret.gold = form.portfolio.percentGold / 100;
+					ret.cash = form.portfolio.percentCash / 100;
+				}
+				break;
+			case 5: //NotOmegaNot
 				if (j>0){
 					var prev = j - 1;
 					var targetvalues = {
@@ -358,7 +426,6 @@ var Simulation = {
 					ret.bonds = totalsafe * form.portfolio.percentBonds / (this.sim[i][j].portfolio.start * (100- form.portfolio.percentEquities));
 					ret.gold = totalsafe * form.portfolio.percentGold / (this.sim[i][j].portfolio.start * (100- form.portfolio.percentEquities));
 					ret.cash = totalsafe * form.portfolio.percentCash / (this.sim[i][j].portfolio.start * (100- form.portfolio.percentEquities));
-					//console.log("j:"+j+" E:"+this.roundTwoDecimals(currentequities/this.sim[i][j].spending)+" B:"+ this.roundTwoDecimals(totalsafe/this.sim[i][j].spending))
 				} else {
 					ret.equities = form.portfolio.percentEquities / 100;
 					ret.bonds = form.portfolio.percentBonds / 100;
