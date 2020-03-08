@@ -207,6 +207,7 @@
                             </div>
                             <label>Retirement Year:<input type="text" class="form-control toot" ng-model="data.retirementStartYear" id="retirementStartYear"></label>
                             <label>Retirement End Year:<input type="text" class="form-control" ng-model="data.retirementEndYear" id="retirementEndYear"></label>
+                            <label>Retirement Length:<input type="text" class="form-control" readonly value="{{ data.retirementEndYear - data.retirementStartYear }}" id="retirementLength"></label>
                             <!-- cFIREsim Open -->
                         </div>
                     </div>
@@ -1451,7 +1452,7 @@
             function ($scope) {
                 $scope.data = {
                     retirementStartYear: new Date().getFullYear(),
-                    retirementEndYear: 2045,
+                    retirementEndYear: new Date().getFullYear() + 30,
                     data: {
                         method: "historicalAll",
                         start: 1900,
@@ -1472,8 +1473,8 @@
                         percentFees: 0.18,
                         growthOfCash: 0.25,
                         rebalanceAnnually: 1,
-                        changeAllocationStartYear: 2025,
-                        changeAllocationEndYear: 2030,
+                        changeAllocationStartYear: new Date().getFullYear(),
+                        changeAllocationEndYear: new Date().getFullYear()+10,
                         targetPercentEquities: 100,
                         targetPercentBonds: 0,
                         targetPercentGold: 0,
