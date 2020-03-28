@@ -207,6 +207,7 @@
                             </div>
                             <label>Retirement Year:<input type="text" class="form-control toot" ng-model="data.retirementStartYear" id="retirementStartYear"></label>
                             <label>Retirement End Year:<input type="text" class="form-control" ng-model="data.retirementEndYear" id="retirementEndYear"></label>
+                            <label>Retirement Length:<input type="text" class="form-control" readonly value="{{ data.retirementEndYear - data.retirementStartYear }}" id="retirementLength"></label>
                             <!-- cFIREsim Open -->
                         </div>
                     </div>
@@ -222,7 +223,11 @@
                         </div>
                         <div class="alert alert-danger" role="alert" id="dataRateError" style="display:none">
                             <span class="sr-only">Error:</span>
-                            Market Growth must be a positive integer.
+                            Market Growth must be a positive number.
+                        </div>
+                        <div class="alert alert-danger" role="alert" id="dataCapeError" style="display:none">
+                            <span class="sr-only">Error:</span>
+                            Starting Cape limits must be positive numbers.
                         </div>
                         <div class="panel-body">
                             <label>
@@ -264,6 +269,20 @@
                                     </div>
                                 </label>
                             </div>
+                            <div id="historicalCapeOptions" class="dataOptions" style="display:none">
+                                <label>
+                                    Minimum Starting Cape:
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="data.data.mincape">
+                                    </div>
+                                </label>
+                                <label>
+                                    Maximum Starting Cape:
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="data.data.maxcape">
+                                    </div>
+                                </label>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label>
@@ -285,7 +304,7 @@
                                 </label>
                             </div>
                             <br><a data-toggle="modal" href="#outputModal" class="btn btn-success btn-lg runSim" ng-click="runSimulation()">Run Simulation</a>
-
+                            <a data-toggle="modal" href="#outputModal" class="btn btn-success btn-lg runSim" style="display:none" id="showPreviousSimulations">Show Previous Simulations</a>
                         </div>
                     </div>
                 </div>
@@ -299,7 +318,7 @@
                         <div class="panel-body">
                             <div class="alert alert-danger" role="alert" id="portfolioError" style="display:none">
                                 <span class="sr-only">Error:</span>
-                                Portfolio must be a positive integer.
+                                Portfolio must be a positive number.
                             </div>
                             <label>Portfolio Value:<input type="number" class="form-control" ng-model="data.portfolio.initial"></label>
                             <div class="panel panel-default">
@@ -464,7 +483,7 @@
                         </div>
                         <div class="alert alert-danger" role="alert" id="initialSpendingError" style="display:none">
                             <span class="sr-only">Error:</span>
-                            Initial Spending amount must be a positive integer.
+                            Initial Spending amount must be a positive number.
                         </div>
                         <div class="panel-body">
                             <label>
@@ -720,7 +739,7 @@
                                     </div>
                                     <div class="alert alert-danger" role="alert" id="ssValueError" style="display:none">
                                         <span class="sr-only">Error:</span>
-                                        Amount must be a positive integer.
+                                        Amount must be a positive number.
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -769,11 +788,11 @@
                                     </div>
                                     <div class="alert alert-danger" role="alert" id="pensionsValueError" style="display:none">
                                         <span class="sr-only">Error:</span>
-                                        Amount must be a positive integer.
+                                        Amount must be a positive number.
                                     </div>
                                     <div class="alert alert-danger" role="alert" id="pensionsRateError" style="display:none">
                                         <span class="sr-only">Error:</span>
-                                        Pension inflation rate must be a positive integer.
+                                        Pension inflation rate must be a positive number.
                                     </div>
                                     <table class="table">
                                         <thead>
@@ -845,11 +864,11 @@
                                 </div>
                                 <div class="alert alert-danger" role="alert" id="extraIncomeRateError" style="display:none">
                                     <span class="sr-only">Error:</span>
-                                    Extra Income inflation rate must be a positive integer.
+                                    Extra Income inflation rate must be a positive number.
                                 </div>
                                 <div class="alert alert-danger" role="alert" id="extraIncomeValueError" style="display:none">
                                     <span class="sr-only">Error:</span>
-                                    Amount must be a positive integer.
+                                    Amount must be a positive number.
                                 </div>
                                 <div class="alert alert-danger" role="alert" id="extraIncomeError" style="display:none">
                                     <span class="sr-only">Error:</span>
@@ -957,11 +976,11 @@
                                 </div>
                                 <div class="alert alert-danger" role="alert" id="extraSpendingValueError" style="display:none">
                                     <span class="sr-only">Error:</span>
-                                    Amount must be a positive integer.
+                                    Amount must be a positive number.
                                 </div>
                                 <div class="alert alert-danger" role="alert" id="extraSpendingRateError" style="display:none">
                                     <span class="sr-only">Error:</span>
-                                    Inflation Rate for Spending must be a positive integer.
+                                    Inflation Rate for Spending must be a positive number.
                                 </div>
                                 <div class="panel-body">
                                     <table class="table">
@@ -1451,13 +1470,15 @@
             function ($scope) {
                 $scope.data = {
                     retirementStartYear: new Date().getFullYear(),
-                    retirementEndYear: 2045,
+                    retirementEndYear: new Date().getFullYear() + 30,
                     data: {
                         method: "historicalAll",
                         start: 1900,
                         end: 1970,
                         growth: 8,
-                        singleStart: 1966
+                        singleStart: 1966,
+                        maxcape: null,
+                        mincape:null
                     },
                     investigate: {
                         type: "none",
@@ -1472,8 +1493,8 @@
                         percentFees: 0.18,
                         growthOfCash: 0.25,
                         rebalanceAnnually: 1,
-                        changeAllocationStartYear: 2025,
-                        changeAllocationEndYear: 2030,
+                        changeAllocationStartYear: new Date().getFullYear(),
+                        changeAllocationEndYear: new Date().getFullYear()+10,
                         targetPercentEquities: 100,
                         targetPercentBonds: 0,
                         targetPercentGold: 0,
@@ -1603,6 +1624,12 @@
                     value: 'singleCycle',
                     formInputs: [
                         'singleCycleOptions'
+                    ]
+                }, {
+                    text: 'Historical Data - Cape Filtered',
+                    value: 'historicalCape',
+                    formInputs: [
+                        'historicalCapeOptions'
                     ]
                 }]
                 $scope.investigateOptionTypes = [{
@@ -1809,18 +1836,27 @@
                         $('#historicalSpecificOptions').show();
                         $('#constantGrowthOptions').hide();
                         $('#singleCycleOptions').hide();
+                        $('#historicalCapeOptions').hide();
                     } else if ($scope.data.data.method == "constant") {
                         $('#constantGrowthOptions').show();
                         $('#historicalSpecificOptions').hide();
                         $('#singleCycleOptions').hide();
+                        $('#historicalCapeOptions').hide();
                     } else if ($scope.data.data.method == "historicalAll") {
                         $('#constantGrowthOptions').hide();
                         $('#historicalSpecificOptions').hide();
                         $('#singleCycleOptions').hide();
+                        $('#historicalCapeOptions').hide();
                     } else if ($scope.data.data.method == "singleCycle") {
                         $('#singleCycleOptions').show();
                         $('#constantGrowthOptions').hide();
                         $('#historicalSpecificOptions').hide();
+                        $('#historicalCapeOptions').hide();
+                    } else if ($scope.data.data.method == "historicalCape") {
+                        $('#historicalCapeOptions').show();
+                        $('#constantGrowthOptions').hide();
+                        $('#historicalSpecificOptions').hide();
+                        $('#singleCycleOptions').hide();
                     }
                 }
                 $scope.refreshInvestigateForm = function () {
