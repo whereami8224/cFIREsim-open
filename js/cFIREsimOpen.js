@@ -757,6 +757,7 @@ var Simulation = {
 
 		$('#tabNav a[href="#' + Simulation.tabs + 'a"]').tab('show');
 		$('a[href="#' + Simulation.tabs + 'a"]').parent('li').show();
+		$('#showPreviousSimulations').show();
 	},
 	convertToCSV: function(results) { //converts a random cycle of simulation into a CSV file, for users to easily view
 		var csv = "";
