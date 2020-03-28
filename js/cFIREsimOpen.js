@@ -142,26 +142,20 @@ var Simulation = {
 		var numCycles = 0;
 		var cycleStart = 1871;
 
-		//Set number of cycles and cycleStart Year depending on Data options
-		if (form.data.method == "historicalAll" || form.data.method == "constant") {
-			numCycles = Object.keys(Market).length - cycleLength + 1;
-		} else if (form.data.method == "historicalSpecific") {
-			numCycles = (form.data.end - form.data.start) - cycleLength + 2;
-			cycleStart = parseInt(form.data.start);
-		}
 		if (form.data.method == "singleCycle") {
 			numCycles = 1;
 			cycleStart = parseInt(form.data.singleStart);
-		}
-		if (form.data.method == "singleCycle") {
 			var cyc = this.cycle(cycleStart, cycleStart + cycleLength);
 			this.sim.push(cyc);
 		} else if (form.data.method != "historicalSpecific") {
+			numCycles = Object.keys(Market).length - cycleLength + 1;
 			for (cycleStart; cycleStart < 1871 + numCycles; cycleStart++) {
 				var cyc = this.cycle(cycleStart, cycleStart + cycleLength);
 				this.sim.push(cyc);
 			}
 		} else if (form.data.method == "historicalSpecific") {
+			numCycles = (form.data.end - form.data.start) - cycleLength + 2;
+			cycleStart = parseInt(form.data.start);
 			for (var i = cycleStart; i < (cycleStart + numCycles); i++) {
 				var cyc = this.cycle(i, i + cycleLength);
 				this.sim.push(cyc);
