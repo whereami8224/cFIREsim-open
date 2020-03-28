@@ -225,6 +225,10 @@
                             <span class="sr-only">Error:</span>
                             Market Growth must be a positive number.
                         </div>
+                        <div class="alert alert-danger" role="alert" id="dataCapeError" style="display:none">
+                            <span class="sr-only">Error:</span>
+                            Starting Cape limits must be positive numbers.
+                        </div>
                         <div class="panel-body">
                             <label>
                                 Data To Use:
@@ -262,6 +266,20 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" ng-model="data.data.growth">
                                         <span class="input-group-addon">%</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div id="historicalCapeOptions" class="dataOptions" style="display:none">
+                                <label>
+                                    Minimum Starting Cape:
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="data.data.mincape">
+                                    </div>
+                                </label>
+                                <label>
+                                    Maximum Starting Cape:
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="data.data.maxcape">
                                     </div>
                                 </label>
                             </div>
@@ -1458,7 +1476,9 @@
                         start: 1900,
                         end: 1970,
                         growth: 8,
-                        singleStart: 1966
+                        singleStart: 1966,
+                        maxcape: null,
+                        mincape:null
                     },
                     investigate: {
                         type: "none",
@@ -1604,6 +1624,12 @@
                     value: 'singleCycle',
                     formInputs: [
                         'singleCycleOptions'
+                    ]
+                }, {
+                    text: 'Historical Data - Cape Filtered',
+                    value: 'historicalCape',
+                    formInputs: [
+                        'historicalCapeOptions'
                     ]
                 }]
                 $scope.investigateOptionTypes = [{
@@ -1806,18 +1832,27 @@
                         $('#historicalSpecificOptions').show();
                         $('#constantGrowthOptions').hide();
                         $('#singleCycleOptions').hide();
+                        $('#historicalCapeOptions').hide();
                     } else if ($scope.data.data.method == "constant") {
                         $('#constantGrowthOptions').show();
                         $('#historicalSpecificOptions').hide();
                         $('#singleCycleOptions').hide();
+                        $('#historicalCapeOptions').hide();
                     } else if ($scope.data.data.method == "historicalAll") {
                         $('#constantGrowthOptions').hide();
                         $('#historicalSpecificOptions').hide();
                         $('#singleCycleOptions').hide();
+                        $('#historicalCapeOptions').hide();
                     } else if ($scope.data.data.method == "singleCycle") {
                         $('#singleCycleOptions').show();
                         $('#constantGrowthOptions').hide();
                         $('#historicalSpecificOptions').hide();
+                        $('#historicalCapeOptions').hide();
+                    } else if ($scope.data.data.method == "historicalCape") {
+                        $('#historicalCapeOptions').show();
+                        $('#constantGrowthOptions').hide();
+                        $('#historicalSpecificOptions').hide();
+                        $('#singleCycleOptions').hide();
                     }
                 }
                 $scope.refreshInvestigateForm = function () {
