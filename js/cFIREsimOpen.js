@@ -165,6 +165,21 @@ var Simulation = {
 					this.sim.push(cyc);
 				}
 				break;
+			case "historicalCape":
+				// get list of suitable start years
+				numCycles = Object.keys(Market).length - cycleLength + 1;
+				var filteredYears = [];
+				for (cycleStart; cycleStart < 1871 + numCycles; cycleStart++) {
+					if ((!form.data.mincape || form.data.mincape < Market[cycleStart]["cape"]) &&
+						(!form.data.maxcape || form.data.maxcape > Market[cycleStart]["cape"] )){
+						filteredYears.push(cycleStart)
+					}
+				}
+				for (i=0; i < filteredYears.length; i++){
+					cycleStart = filteredYears[i]
+					var cyc = this.cycle(cycleStart, cycleStart + cycleLength);
+					this.sim.push(cyc);
+				}
 		}
 
 		if (form.investigate.type == 'none') {
@@ -591,7 +606,7 @@ var Simulation = {
 		var spendingData = [];
 		var interval = results.length;
 		var cycLength = results[0].length;
-		var simLength = results.length + cycLength - 1;
+		var simLength = results[results.length-1][cycLength-1]["year"] - results[0][0]["year"] +1;
 
 		//Logic to create array for Dygraphs display. Each series must have an entry for every year in the dataset. If there is no entry for that year in the "results" array, a null value is given so that dygraphs doesn't plot there. This provides the unique look of cFIREsims graph
 		for (var i = 0; i < simLength; i++) {
