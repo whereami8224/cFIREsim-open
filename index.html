@@ -127,10 +127,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><button type="button" class="btn btn-default navbar-btn" id="saveSimBtn">Save Simulation Inputs</button></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load Saved Sim <span class="caret"></span></a>
-                        <ul class="dropdown-menu" id="savedSimsDropdown"></ul>
-                    </li>;
+                    <li><button type="button" class="btn btn-default navbar-btn" id="loadSimBtn">Load Saved Sim</button></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -1444,7 +1441,7 @@
                 <div class="modal-body">
                     <div class="input-group">
                         <span class='input-group-addon'>Saved Simulation Name:</span><input type='text' size='12' class='form-control' id='simNameInput'>
-                    </div>
+                    </div><br>
                     <button type="button" class="btn btn-success" id="confirmSaveSim">Save Sim</button>
                 </div>
                 <div class="modal-footer">

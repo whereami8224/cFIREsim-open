@@ -1,3 +1,22 @@
+function download(filename, content) {
+	if (navigator.msSaveBlob) { // IE 10+ 
+		navigator.msSaveBlob(new Blob([content], {
+			type: 'text/xml;charset=utf-8;'
+		}), filename);
+	} else {
+		var element = document.createElement('a');
+		element.setAttribute('href', 'data:text/xml;charset=utf-8,' + encodeURIComponent(content));
+		element.setAttribute('download', filename);
+
+		element.style.display = 'none';
+		document.body.appendChild(element);
+
+		element.click();
+
+		document.body.removeChild(element);
+	}
+}
+
 $(document).ready(function() {
 
 	//Full-screen modals	
@@ -22,29 +41,20 @@ $(document).ready(function() {
 		}
 	});
 
-	//Populate Saved Sims dropdown if user is logged in
-	if ($("#username").html() != undefined) {
-		Simulation.getQueries();
+	//Open the Save Sim input field containing simName input and submit/cancel buttons
+	$('#saveSimBtn').click(function(e) {
+		$('#saveSimPopup').modal('show');
+	});
 
-		//Open the Save Sim input field containing simName input and submit/cancel buttons
-		$('#saveSimBtn').click(function(e) {
-			$('#saveSimPopup').modal('show');
-		});
+	//Open the Load Sim input field containing file input and submit/cancel buttons
+	$('#loadSimBtn').click(function(e) {
+		$('#loadSimPopup').modal('show');
+	});
 
-		//When Saved Sim is submitted, save to DB
-		$('#confirmSaveSim').click(function(e) {
-			e.stopImmediatePropagation();
-			Simulation.saveSim($("#username").html());
-		});
-
-		//Close Save Sim success popup
-		$('#closeSaveSuccess').click(function(e) {
-			$('#saveSimSuccess').hide();
-		});
-	}
-
-	$("#signInBtn").click(function() {
-		window.location.href = "../phpBB3/login.php";
+	//When Saved Sim is submitted, save to DB
+	$('#confirmSaveSim').click(function(e) {
+		e.stopImmediatePropagation();
+		Simulation.saveSim();
 	});
 
 });
@@ -110,26 +120,12 @@ var Simulation = {
 			scope.refreshRebalanceAnnuallyOptions();
 		});
 	},
-	saveSim: function(username) {
+	saveSim: function() {
 		var scope = angular.element($("#input")).scope();
 		scope.$apply(function() {
 			var json_savedSim = JSON.stringify(scope.data, null, 2);
-			$.ajax({
-				url: "getData.php",
-				type: "POST",
-				dataType: 'JSON',
-				data: {
-					param: "saveSim",
-					json: json_savedSim,
-					username: username,
-					simName: $('#simNameInput').val(),
-				},
-			}).success(function() {
-				$('#saveSimPopup').modal('hide');
-				console.log("Save Success!");
-				$('#saveSimSuccess').fadeIn(300, "linear");
-				Simulation.getQueries();
-			});
+			download($('#simNameInput').val()+'.FIREsim',json_savedSim)
+			$('#saveSimPopup').modal('hide');
 		});
 	},
 	runSimulation: function(form) {
@@ -764,7 +760,7 @@ var Simulation = {
 		/*
 		//Random number generator for supplying a CSV of only 1 random cycle. Disabled for debugging purposes.
 		function getRandomInt(min, max) {
-		    return Math.floor(Math.random() * (max - min)) + min;
+			return Math.floor(Math.random() * (max - min)) + min;
 		}
 		var num = getRandomInt(0, results.length);
 		*/
