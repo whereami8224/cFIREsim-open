@@ -89,6 +89,98 @@
             .ot_banner_output a {
                 color: #23568f;
             }
+
+        /**
+        * Reset button styles
+        * It takes some work to achieve a “blank slate” look.
+        */
+        button {
+        padding: 0;
+        border: none;
+        font: inherit;
+        color: inherit;
+        background-color: transparent;
+        /* show a hand cursor on hover; some argue that we
+        should keep the default arrow cursor for buttons */
+        cursor: pointer;
+        }
+
+        /**
+        * Button component
+        */
+        input[type=button], .custom-file-upload{
+        /* default for <button>, but needed for <a> */
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        font-size: 0.8rem;
+
+        /* create a small space when buttons wrap on 2 lines */
+        margin: 2px 0;
+
+        /* invisible border (will be colored on hover/focus) */
+        border: solid 1px currentColor;  /*transparent;*/
+        border-radius: 4px;
+
+        /* button size comes from text + padding, avoid height */
+        padding: 0.5em 1em;
+
+        /* make sure colors have enough contrast! */
+        color: #666;
+        background-color: #FFFFFF;
+        }
+
+        /* old-school "down" effect on clic + color tweak */
+        input[type=button]:active, .custom-file-upload:active {
+        transform: translateY(1px);
+        filter: saturate(150%);
+        }
+
+        /* inverse colors on hover */
+        input[type=button]:hover, .custom-file-upload:hover {
+        color: #FFFFFF;
+        border-color: transparent;
+        background-color: #999;
+        }
+
+        /* gray out disabled buttons*/
+        input[type=button]:disabled{
+        color: #666;
+        background-color: #ccc;
+        border-color: currentColor
+        }
+
+        /* Firefox: remove the inner border shown on focus */
+        input[type=button]::-moz-focus-inner {
+        border: none;
+        }
+
+        /* make sure we have a visible focus ring */
+        input[type=button]:focus, .custom-file-upload:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px #eb989b,
+            0 0 0 1px #eb989b;
+        border-color: #ec1d24;
+        }
+
+        /* hide focus style if not from keyboard navigation */
+        .js-focus-visible input[type=button]:focus:not(.focus-visible),
+        .js-focus-visible .custom-file-upload:focus:not(.focus-visible) {
+        box-shadow: none;
+        }
+
+        input.highlight {
+        color: #ec1d24;
+        }
+
+        input.highlight:hover {
+        background-color: #ec1d24;
+        }
+
+        input[type="file"]      {
+            display: none;
+        }
+
     </style>
     <script src='https://code.jquery.com/jquery-1.11.3.min.js' language='Javascript' type='text/javascript'></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
@@ -127,10 +219,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><button type="button" class="btn btn-default navbar-btn" id="saveSimBtn">Save Simulation Inputs</button></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load Saved Sim <span class="caret"></span></a>
-                        <ul class="dropdown-menu" id="savedSimsDropdown"></ul>
-                    </li>;
+                    <li><button type="button" class="btn btn-default navbar-btn" id="loadSimBtn">Load Saved Sim</button></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -1444,8 +1533,29 @@
                 <div class="modal-body">
                     <div class="input-group">
                         <span class='input-group-addon'>Saved Simulation Name:</span><input type='text' size='12' class='form-control' id='simNameInput'>
-                    </div>
+                    </div><br>
                     <button type="button" class="btn btn-success" id="confirmSaveSim">Save Sim</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Save Sim Modal -->
+    <!-- Load Sim Modal -->
+    <div class="modal fade" id="loadSimPopup" tabindex="" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Load Simulation Inputs</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label for="file" clas="custom-file-upload">Select File</label>
+                        <input id="file" type="file" accept=".FIREsim"/>
+                    </div><br>
+                    <button type="button" class="btn btn-success" id="confirmLoadSim">Load Sim</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
