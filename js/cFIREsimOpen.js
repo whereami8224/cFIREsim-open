@@ -64,7 +64,6 @@ $(document).ready(function() {
 		var reader = new FileReader();
 		reader.onload = function(e){
 			var data = e.target.result;
-			console.log(data)
 			Simulation.loadSavedSim(data);
 		}
 		reader.readAsText(f);
