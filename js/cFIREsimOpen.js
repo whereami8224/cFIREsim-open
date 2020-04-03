@@ -1,11 +1,11 @@
 function download(filename, content) {
 	if (navigator.msSaveBlob) { // IE 10+ 
 		navigator.msSaveBlob(new Blob([content], {
-			type: 'text/xml;charset=utf-8;'
+			type: 'text/json;charset=utf-8;'
 		}), filename);
 	} else {
 		var element = document.createElement('a');
-		element.setAttribute('href', 'data:text/xml;charset=utf-8,' + encodeURIComponent(content));
+		element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(content));
 		element.setAttribute('download', filename);
 
 		element.style.display = 'none';
@@ -46,15 +46,28 @@ $(document).ready(function() {
 		$('#saveSimPopup').modal('show');
 	});
 
+	//When Saved Sim is submitted, save to file
+	$('#confirmSaveSim').click(function(e) {
+		e.stopImmediatePropagation();
+		Simulation.saveSim();
+	});
+
 	//Open the Load Sim input field containing file input and submit/cancel buttons
 	$('#loadSimBtn').click(function(e) {
 		$('#loadSimPopup').modal('show');
 	});
 
-	//When Saved Sim is submitted, save to DB
-	$('#confirmSaveSim').click(function(e) {
+	//When Load Sim is submitted, load data from file
+	$('#confirmLoadSim').click(function(e) {
 		e.stopImmediatePropagation();
-		Simulation.saveSim();
+		f = $('#file').prop('files')[0];
+		var reader = new FileReader();
+		reader.onload = function(e){
+			var data = e.target.result;
+			console.log(data)
+			Simulation.loadSavedSim(data);
+		}
+		reader.readAsText(f);
 	});
 
 });
@@ -116,8 +129,8 @@ var Simulation = {
 			scope.refreshDataForm();
 			scope.refreshSpendingForm();
 			scope.refreshInvestigateForm();
-			scope.refreshConstantAllocationOptions();
 			scope.refreshRebalanceAnnuallyOptions();
+            $('#loadSimPopup').modal('hide');
 		});
 	},
 	saveSim: function() {
