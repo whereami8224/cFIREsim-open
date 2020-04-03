@@ -76,50 +76,6 @@ var Simulation = {
 	sim: [],
 	tabs: 0,
 	g: [], //dygraph object
-	getQueries: function() {
-		var username = $("#username").html();
-		$.ajax({
-			url: "getData.php",
-			type: "POST",
-			dataType: 'JSON',
-			data: {
-				param: "getNames",
-				username: username,
-			},
-		}).success(function(data) {
-			var html = "";
-			for (var i = 0; i < data.qid.length; i++) {
-				html += "<li><a href='#' id='" + data.qid[i] + "' class='savedSim'>ID:" + data.qid[i] + " - " + data.simName[i] + "</a></li>"
-			}
-			$("#savedSimsDropdown").html(html);
-			$('.dropdown-menu a').click(function() {
-				var id = $(this).attr('id');
-				Simulation.getSavedSim(id);
-			});
-		});
-	},
-	getSavedSim: function(qid) {
-		$.ajax({
-			url: "getData.php",
-			type: "POST",
-			dataType: "JSON",
-			data: {
-				param: "getSavedSim",
-				qid: qid,
-			}
-		}).success(function(data) {
-			if (data == null) {
-				var html = "<p>Could not load ID:" + Simulation.getUrlVars(['id']) + ". There is no data for that ID.</p>";
-				$("#loadedSimFailText").html(html);
-				$("#loadedSimFail").show();
-			} else {
-				Simulation.loadSavedSim(data.data);
-				var html = "<p>Successfully loaded ID#" + data.qid + " - '" + data.simName + "'</p>";
-				$("#loadedSimHeaderText").html(html);
-				$("#loadedSimHeader").show();
-			}
-		});
-	},
 	loadSavedSim: function(data) {
 		//Load in angular scope from outside the controller
 		var scope = angular.element($("#input")).scope();
