@@ -437,7 +437,7 @@ var Simulation = {
 		//Sum all assets to determine portfolio end value.
 		totalEnd = this.sim[i][j].equities.end + this.sim[i][j].bonds.end + this.sim[i][j].cash.end + this.sim[i][j].gold.end;
 		this.sim[i][j].portfolio.end = !isNaN(totalEnd) ? this.roundTwoDecimals(totalEnd) : 0;
-		this.sim[i][j].portfolio.infAdjEnd = parseInt(this.sim[i][j].portfolio.end / this.sim[i][j].cumulativeInflation);
+		this.sim[i][j].portfolio.infAdjEnd = this.roundTwoDecimals(this.sim[i][j].portfolio.end / this.sim[i][j].cumulativeInflation);
 	},
 	calcFailures: function(results) {
 		var totalFailures = 0;
