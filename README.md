@@ -1,6 +1,6 @@
 cFIREsim-open
 =============
-Current Demo Available: http://www.cfiresim.com/
+Current Demo Available: https://alistair-marshall.github.io/cFIREsim-open/
 
 Purpose:  This project is intended to bring absolute transparency to the cFIREsim project, to refresh the code and move it away from PHP and into Javascript, and to provide the opportunity for others in the FIRE community to participate in the rebuilding effort.
 
@@ -11,6 +11,6 @@ Disclaimers:
 
 - I have a full-time job AND another for-fun programming project. This project originally took me months to develop.  With those things in mind, progress may be slow. 
 	
-Collaboration: Primary discussion of the project can be done on the cFIREsim forums at: http://www.cfiresim.com/    To request access to the Open Source forum, PM bo_knows. Alternatively, email me at cfiresim@gmail.com
+Collaboration: Primary discussion of the project can be done here on the github issues page.
 
 License: This software falls under the Apache License 2.0
