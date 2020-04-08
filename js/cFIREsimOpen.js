@@ -246,7 +246,7 @@ var Simulation = {
 		}
 
 		this.sim[i][j].spending = spending; //assign value to main sim container
-		this.sim[i][j].infAdjSpending = Math.round(spending / this.sim[i][j].cumulativeInflation);
+		this.sim[i][j].infAdjSpending = this.roundTwoDecimals(spending / this.sim[i][j].cumulativeInflation);
 	},
 	calcAllocation: function(form, i, j) {
 		var ret = {
@@ -286,10 +286,10 @@ var Simulation = {
 				range.total = range.end - range.start;
 				if (j >= range.start && j <= range.end) { //This smooths the transition from one allocation level to another, by equal increments over the course of the entire time range.
 					var allocationStep = j - range.start;
-					ret.equities = parseInt(form.portfolio.percentEquities - (((form.portfolio.percentEquities - form.portfolio.targetPercentEquities) / range.total) * allocationStep)) / 100;
-					ret.bonds = parseInt(form.portfolio.percentBonds - (((form.portfolio.percentBonds - form.portfolio.targetPercentBonds) / range.total) * allocationStep)) / 100;
-					ret.gold = parseInt(form.portfolio.percentGold - (((form.portfolio.percentGold - form.portfolio.targetPercentGold) / range.total) * allocationStep)) / 100;
-					ret.cash = parseInt(form.portfolio.percentCash - (((form.portfolio.percentCash - form.portfolio.targetPercentCash) / range.total) * allocationStep)) / 100;
+					ret.equities = parseFloat(form.portfolio.percentEquities - (((form.portfolio.percentEquities - form.portfolio.targetPercentEquities) / range.total) * allocationStep)) / 100;
+					ret.bonds = parseFloat(form.portfolio.percentBonds - (((form.portfolio.percentBonds - form.portfolio.targetPercentBonds) / range.total) * allocationStep)) / 100;
+					ret.gold = parseFloat(form.portfolio.percentGold - (((form.portfolio.percentGold - form.portfolio.targetPercentGold) / range.total) * allocationStep)) / 100;
+					ret.cash = parseFloat(form.portfolio.percentCash - (((form.portfolio.percentCash - form.portfolio.targetPercentCash) / range.total) * allocationStep)) / 100;
 				}
 				if (j < range.start) {
 					ret.equities = form.portfolio.percentEquities / 100;
@@ -388,10 +388,10 @@ var Simulation = {
 
 		//Calculate growth
 		if (form.data.method == "constant") {
-			this.sim[i][j].equities.growth = this.roundTwoDecimals(this.sim[i][j].equities.start * (parseInt(form.data.growth) / 100));
+			this.sim[i][j].equities.growth = this.roundTwoDecimals(this.sim[i][j].equities.start * (parseFloat(form.data.growth) / 100));
 			this.sim[i][j].dividends.growth = 0;
-			this.sim[i][j].bonds.growth = this.roundTwoDecimals(this.sim[i][j].bonds.start * (parseInt(form.data.growth) / 100));
-			this.sim[i][j].gold.growth = this.roundTwoDecimals(this.sim[i][j].gold.start * (parseInt(form.data.growth) / 100));
+			this.sim[i][j].bonds.growth = this.roundTwoDecimals(this.sim[i][j].bonds.start * (parseFloat(form.data.growth) / 100));
+			this.sim[i][j].gold.growth = this.roundTwoDecimals(this.sim[i][j].gold.start * (parseFloat(form.data.growth) / 100));
 			this.sim[i][j].cash.growth = this.roundTwoDecimals(this.sim[i][j].cash.start * ((form.portfolio.growthOfCash / 100)));
 		} else {
 			this.sim[i][j].equities.growth = this.roundTwoDecimals(this.sim[i][j].equities.start * (this.sim[i][j].data.growth));
@@ -437,7 +437,7 @@ var Simulation = {
 		//Sum all assets to determine portfolio end value.
 		totalEnd = this.sim[i][j].equities.end + this.sim[i][j].bonds.end + this.sim[i][j].cash.end + this.sim[i][j].gold.end;
 		this.sim[i][j].portfolio.end = !isNaN(totalEnd) ? this.roundTwoDecimals(totalEnd) : 0;
-		this.sim[i][j].portfolio.infAdjEnd = parseInt(this.sim[i][j].portfolio.end / this.sim[i][j].cumulativeInflation);
+		this.sim[i][j].portfolio.infAdjEnd = this.roundTwoDecimals(this.sim[i][j].portfolio.end / this.sim[i][j].cumulativeInflation);
 	},
 	calcFailures: function(results) {
 		var totalFailures = 0;
@@ -520,14 +520,14 @@ var Simulation = {
 				return (adj.val * Math.pow(percentage, (j + 1)));
 			}
 		} else if (adj.inflationAdjusted == false) {
-			return parseInt(adj.val);
+			return parseFloat(adj.val);
 		}
 	},
 	calcInvestigation: function(sim, form) {
 		if (form.investigate.type == 'maxInitialSpending') {
 			var min = 0,
 				max = 1000000;
-			while (Math.round(min) <= Math.round(max)) {
+			while (min+0.1 <= max) {
 				var mid = ((max - min) / 2) + min;
 				form.spending.initial = mid;
 				for (var i = 0; i < this.sim.length; i++) {
@@ -585,7 +585,7 @@ var Simulation = {
 			for (var j = 0; j < results.length; j++) {
 				for (var k = 0; k < cycLength; k++) {
 					if (results[j][k].year == (i + results[0][0].year)) {
-						chartData[i][j] = parseInt(results[j][k].portfolio.infAdjEnd);
+						chartData[i][j] = results[j][k].portfolio.infAdjEnd;
 						spendingData[i][j] = results[j][k].infAdjSpending;
 					}
 				}
@@ -691,6 +691,7 @@ var Simulation = {
 					y: {
 						axisLabelWidth: 100,
 						labelsKMB: false,
+                        includeZero: true,
 						maxNumberWidth: 11,
 						valueFormatter: function numberWithCommas(x) {
 							return 'Spending: $' + x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
