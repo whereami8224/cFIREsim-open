@@ -3,10 +3,10 @@ $(document).ready(function() {
 	//Validation Rules
 	//Allocations add up to 100%
 	function cmpAllocation(){
-		var equities = parseInt($("input[ng-model='data.portfolio.percentEquities']").val());
-		var bonds = parseInt($("input[ng-model='data.portfolio.percentBonds']").val());
-		var gold = parseInt($("input[ng-model='data.portfolio.percentGold']").val());
-		var cash = parseInt($("input[ng-model='data.portfolio.percentCash']").val());
+		var equities = parseFloat($("input[ng-model='data.portfolio.percentEquities']").val());
+		var bonds = parseFloat($("input[ng-model='data.portfolio.percentBonds']").val());
+		var gold = parseFloat($("input[ng-model='data.portfolio.percentGold']").val());
+		var cash = parseFloat($("input[ng-model='data.portfolio.percentCash']").val());
 		if(equities + bonds + gold + cash == 100){
 			return true;
 		}else{
@@ -52,10 +52,10 @@ $(document).ready(function() {
 	
 	//Target Assets allocation add up to 100%
 	function cmpTargetAllocation(){
-		var equities = parseInt($("input[ng-model='data.portfolio.targetPercentEquities']").val());
-		var bonds = parseInt($("input[ng-model='data.portfolio.targetPercentBonds']").val());
-		var gold = parseInt($("input[ng-model='data.portfolio.targetPercentGold']").val());
-		var cash = parseInt($("input[ng-model='data.portfolio.targetPercentCash']").val());
+		var equities = parseFloat($("input[ng-model='data.portfolio.targetPercentEquities']").val());
+		var bonds = parseFloat($("input[ng-model='data.portfolio.targetPercentBonds']").val());
+		var gold = parseFloat($("input[ng-model='data.portfolio.targetPercentGold']").val());
+		var cash = parseFloat($("input[ng-model='data.portfolio.targetPercentCash']").val());
 		if(equities + bonds + gold + cash == 100){
 			return true;
 		}else{
@@ -161,7 +161,7 @@ $(document).ready(function() {
 	
 	//Initial Portfolio Validation
 	function cmpPortfolio(){
-		var portfolio = parseInt($("input[ng-model='data.portfolio.initial']").val());
+		var portfolio = parseFloat($("input[ng-model='data.portfolio.initial']").val());
 		if((portfolio >= 0) && !(isNaN(portfolio))){
 			return true;
 		}else{
@@ -181,7 +181,7 @@ $(document).ready(function() {
 
 	//Spending Validation
 	function cmpInitialSpending(){
-		var spending = parseInt($("input[ng-model='data.spending.initial']").val());
+		var spending = parseFloat($("input[ng-model='data.spending.initial']").val());
 		if((spending >= 0) && !(isNaN(spending))){
 			return true;
 		}else{
@@ -214,12 +214,12 @@ function cmpPensions() {
         if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value)))) {
             yearsTrigger = false;
         }
-		if(parseInt(values[i].value) < 0 || (isNaN(parseInt(values[i].value)))){
+		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
 			valueTrigger = false;
 		}
     }
     for (var i = 0; i < inflRate.length; i++) {
-        if (((parseInt(inflRate[i].value) < 0) || (isNaN(parseInt(inflRate[i].value)))) && inflType[i].value == 1) {
+        if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
             rateTrigger = false;
         }
     }
@@ -274,7 +274,7 @@ function cmpExtraSpending() {
         if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value))) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
             yearsTrigger = false;
         }
-		if(parseInt(values[i].value) < 0 || (isNaN(parseInt(values[i].value)))){
+		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
 			valueTrigger = false;
 		}
 		if(((isNaN(parseInt(startYears[i].value))) || (isNaN(parseInt(endYears[i].value)))) && recurring[i].value == 0){
@@ -282,7 +282,7 @@ function cmpExtraSpending() {
 		}
     }
 	for (var i = 0; i < inflRate.length; i++) {
-        if (((parseInt(inflRate[i].value) < 0) || (isNaN(parseInt(inflRate[i].value)))) && inflType[i].value == 1) {
+        if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
             rateTrigger = false;
         }
     }
@@ -346,10 +346,10 @@ function cmpExtraIncome() {
 		if(((isNaN(parseInt(startYears[i].value))) || (isNaN(parseInt(endYears[i].value)))) && recurring[i].value == 0){
 			yearsTrigger = false;
 		}
-		if(parseInt(values[i].value) < 0 || (isNaN(parseInt(values[i].value)))){
+		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
 			valueTrigger = false;
 		}
-		if (((parseInt(inflRate[i].value) < 0) || (isNaN(parseInt(inflRate[i].value)))) && inflType[i].value == 1) {
+		if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
             rateTrigger = false;
         }
     }
@@ -411,7 +411,7 @@ function cmpSS(){
 		if(((isNaN(parseInt(startYears[i][0].value))) || (isNaN(parseInt(endYears[i][0].value))))){
 			yearsTrigger = false;
 		}
-		if(parseInt(values[i][0].value) < 0 || (isNaN(parseInt(values[i][0].value)))){
+		if(parseFloat(values[i][0].value) < 0 || (isNaN(parseFloat(values[i][0].value)))){
 			valueTrigger = false;
 		}
     }
@@ -470,7 +470,7 @@ function cmpDataOptions(){
 		yearsTrigger = false;
 	}
 
-	if (((parseInt(rate[0].value) < 0) || (isNaN(parseInt(rate[0].value))))) {
+	if (((parseFloat(rate[0].value) < 0) || (isNaN(parseFloat(rate[0].value))))) {
 		rateTrigger = false;
 	}
 
