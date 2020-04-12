@@ -317,9 +317,13 @@
                             <span class="sr-only">Error:</span>
                             Market Growth must be a positive number.
                         </div>
+                        <div class="alert alert-danger" role="alert" id="dataSingleYearError" style="display:none">
+                            <span class="sr-only">Error:</span>
+                            Start Year must be >= 1871 and early enough to have enough data available for the simulation length.
+                        </div>
                         <div class="alert alert-danger" role="alert" id="dataCapeError" style="display:none">
                             <span class="sr-only">Error:</span>
-                            Starting Cape limits must be positive numbers.
+                            CAPE limits must be positive numbers and minimum CAPE must be less than maximum CAPE.
                         </div>
                         <div class="panel-body">
                             <label>

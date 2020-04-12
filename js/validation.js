@@ -204,50 +204,50 @@ $(document).ready(function() {
 
 //Pensions Validation
 function cmpPensions() {
-    var startYears = $("input[ng-model='pension.startYear']");
+	var startYears = $("input[ng-model='pension.startYear']");
 	var values = $("input[ng-model='pension.val']");
-    var currentYear = new Date().getFullYear();
+	var currentYear = new Date().getFullYear();
 	var inflRate = $("input[ng-model='pension.inflationRate']");
-    var inflType = $("select[ng-model='pension.inflationType']");
-    var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
-    for (var i = 0; i < startYears.length; i++) {
-        if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value)))) {
-            yearsTrigger = false;
-        }
+	var inflType = $("select[ng-model='pension.inflationType']");
+	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
+	for (var i = 0; i < startYears.length; i++) {
+		if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value)))) {
+			yearsTrigger = false;
+		}
 		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
 			valueTrigger = false;
 		}
-    }
-    for (var i = 0; i < inflRate.length; i++) {
-        if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
-            rateTrigger = false;
-        }
-    }
-    if (yearsTrigger == true) {
-        $("#pensionsError").hide();
-        $(".runSim").removeClass("disabled");
-    } else if (yearsTrigger == false) {
-        $("#pensionsError").show();
-        $(".runSim").addClass("disabled");
-    }
+	}
+	for (var i = 0; i < inflRate.length; i++) {
+		if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
+			rateTrigger = false;
+		}
+	}
+	if (yearsTrigger == true) {
+		$("#pensionsError").hide();
+		$(".runSim").removeClass("disabled");
+	} else if (yearsTrigger == false) {
+		$("#pensionsError").show();
+		$(".runSim").addClass("disabled");
+	}
 	if (valueTrigger == true) {
-        $("#pensionsValueError").hide();
-        $(".runSim").removeClass("disabled");
-    } else if (valueTrigger == false) {
-        $("#pensionsValueError").show();
-        $(".runSim").addClass("disabled");
-    }
+		$("#pensionsValueError").hide();
+		$(".runSim").removeClass("disabled");
+	} else if (valueTrigger == false) {
+		$("#pensionsValueError").show();
+		$(".runSim").addClass("disabled");
+	}
 	if (rateTrigger == true) {
-        $("#pensionsRateError").hide();
-        $(".runSim").removeClass("disabled");
-    } else if (rateTrigger == false) {
-        $("#pensionsRateError").show();
-        $(".runSim").addClass("disabled");
-    }
+		$("#pensionsRateError").hide();
+		$(".runSim").removeClass("disabled");
+	} else if (rateTrigger == false) {
+		$("#pensionsRateError").show();
+		$(".runSim").addClass("disabled");
+	}
 }
 
 $(document).on("keyup", "input[ng-model='pension.startYear']", function() {
-    cmpPensions();
+	cmpPensions();
 });
 $(document).on("keyup", "input[ng-model='pension.inflationRate']", function() {
 	cmpPensions();
@@ -262,65 +262,65 @@ $(document).on('change',"select[ng-model='pension.inflationType']",  function() 
 
 //Extra Spending Validation
 function cmpExtraSpending() {
-    var startYears = $("input[ng-model='extraSpending.startYear']");
-    var endYears = $("input[ng-model='extraSpending.endYear']");
-    var currentYear = new Date().getFullYear();
+	var startYears = $("input[ng-model='extraSpending.startYear']");
+	var endYears = $("input[ng-model='extraSpending.endYear']");
+	var currentYear = new Date().getFullYear();
 	var values = $("input[ng-model='extraSpending.val']");
 	var inflRate = $("input[ng-model='extraSpending.inflationRate']");
-    var inflType = $("select[ng-model='extraSpending.inflationType']");
+	var inflType = $("select[ng-model='extraSpending.inflationType']");
 	var recurring = $("select[ng-model='extraSpending.recurring']");
-    var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
-    for (var i = 0; i < startYears.length; i++) {
-        if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value))) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
-            yearsTrigger = false;
-        }
+	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
+	for (var i = 0; i < startYears.length; i++) {
+		if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value))) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
+			yearsTrigger = false;
+		}
 		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
 			valueTrigger = false;
 		}
 		if(((isNaN(parseInt(startYears[i].value))) || (isNaN(parseInt(endYears[i].value)))) && recurring[i].value == 0){
 			yearsTrigger = false;
 		}
-    }
+	}
 	for (var i = 0; i < inflRate.length; i++) {
-        if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
-            rateTrigger = false;
-        }
-    }
-    if(yearsTrigger == true){
-    	$("#extraSpendingError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (yearsTrigger == false){
-    	$("#extraSpendingError").show();
-        $(".runSim").addClass("disabled");
-    }
+		if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
+			rateTrigger = false;
+		}
+	}
+	if(yearsTrigger == true){
+		$("#extraSpendingError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (yearsTrigger == false){
+		$("#extraSpendingError").show();
+		$(".runSim").addClass("disabled");
+	}
 	if(valueTrigger == true){
-    	$("#extraSpendingValueError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (valueTrigger == false){
-    	$("#extraSpendingValueError").show();
-        $(".runSim").addClass("disabled");
-    }
+		$("#extraSpendingValueError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (valueTrigger == false){
+		$("#extraSpendingValueError").show();
+		$(".runSim").addClass("disabled");
+	}
 	if(rateTrigger == true){
-    	$("#extraSpendingRateError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (rateTrigger == false){
-    	$("#extraSpendingRateError").show();
-        $(".runSim").addClass("disabled");
-    }
+		$("#extraSpendingRateError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (rateTrigger == false){
+		$("#extraSpendingRateError").show();
+		$(".runSim").addClass("disabled");
+	}
 
 }
 
 $(document).on("keyup", "input[ng-model='extraSpending.endYear']", function() {
-    cmpExtraSpending();
+	cmpExtraSpending();
 });
 $(document).on("keyup", "input[ng-model='extraSpending.inflationRate']", function() {
-    cmpExtraSpending();
+	cmpExtraSpending();
 });
 $(document).on("keyup", "input[ng-model='extraSpending.startYear']", function() {
-    cmpExtraSpending();
+	cmpExtraSpending();
 });
 $(document).on("keyup", "input[ng-model='extraSpending.val']", function() {
-    cmpExtraSpending();
+	cmpExtraSpending();
 });
 $(document).on('change',"select[ng-model='extraSpending.inflationType']",  function() {
 	cmpExtraSpending();
@@ -331,18 +331,18 @@ $(document).on('change',"select[ng-model='extraSpending.recurring']",  function(
 
 //Extra Income Validation
 function cmpExtraIncome() {
-    var startYears = $("input[ng-model='extraSaving.startYear']");
-    var endYears = $("input[ng-model='extraSaving.endYear']");
-    var currentYear = new Date().getFullYear();
+	var startYears = $("input[ng-model='extraSaving.startYear']");
+	var endYears = $("input[ng-model='extraSaving.endYear']");
+	var currentYear = new Date().getFullYear();
 	var values = $("input[ng-model='extraSaving.val']");
 	var inflRate = $("input[ng-model='extraSaving.inflationRate']");
-    var inflType = $("select[ng-model='extraSaving.inflationType']");
+	var inflType = $("select[ng-model='extraSaving.inflationType']");
 	var recurring = $("select[ng-model='extraSaving.recurring']");
-    var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
-    for (var i = 0; i < startYears.length; i++) {
-        if ((parseInt(startYears[i].value) < currentYear) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
-            yearsTrigger = false;
-        }
+	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
+	for (var i = 0; i < startYears.length; i++) {
+		if ((parseInt(startYears[i].value) < currentYear) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
+			yearsTrigger = false;
+		}
 		if(((isNaN(parseInt(startYears[i].value))) || (isNaN(parseInt(endYears[i].value)))) && recurring[i].value == 0){
 			yearsTrigger = false;
 		}
@@ -350,45 +350,45 @@ function cmpExtraIncome() {
 			valueTrigger = false;
 		}
 		if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
-            rateTrigger = false;
-        }
-    }
+			rateTrigger = false;
+		}
+	}
 
-    if(yearsTrigger == true){
-    	$("#extraIncomeError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (yearsTrigger == false){
-    	$("#extraIncomeError").show();
-        $(".runSim").addClass("disabled");
-    }
+	if(yearsTrigger == true){
+		$("#extraIncomeError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (yearsTrigger == false){
+		$("#extraIncomeError").show();
+		$(".runSim").addClass("disabled");
+	}
 	if(valueTrigger == true){
-    	$("#extraIncomeValueError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (valueTrigger == false){
-    	$("#extraIncomeValueError").show();
-        $(".runSim").addClass("disabled");
-    }
+		$("#extraIncomeValueError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (valueTrigger == false){
+		$("#extraIncomeValueError").show();
+		$(".runSim").addClass("disabled");
+	}
 	if(rateTrigger == true){
-    	$("#extraIncomeRateError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (rateTrigger == false){
-    	$("#extraIncomeRateError").show();
-        $(".runSim").addClass("disabled");
-    }
+		$("#extraIncomeRateError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (rateTrigger == false){
+		$("#extraIncomeRateError").show();
+		$(".runSim").addClass("disabled");
+	}
 
 }
 
 $(document).on("keyup", "input[ng-model='extraSaving.endYear']", function() {
-    cmpExtraIncome();
+	cmpExtraIncome();
 });
 $(document).on("keyup", "input[ng-model='extraSaving.inflationRate']", function() {
-    cmpExtraIncome();
+	cmpExtraIncome();
 });
 $(document).on("keyup", "input[ng-model='extraSaving.startYear']", function() {
-    cmpExtraIncome();
+	cmpExtraIncome();
 });
 $(document).on("keyup", "input[ng-model='extraSaving.val']", function() {
-    cmpExtraIncome();
+	cmpExtraIncome();
 });
 $(document).on('change',"select[ng-model='extraSaving.inflationType']",  function() {
 	cmpExtraIncome();
@@ -403,99 +403,135 @@ function cmpSS(){
 	var endYears = [$("input[ng-model='data.extraIncome.socialSecurity.endYear']"), $("input[ng-model='data.extraIncome.socialSecuritySpouse.endYear']")] ;    
 	var currentYear = new Date().getFullYear();
 	var values = [$("input[ng-model='data.extraIncome.socialSecurity.val']"), $("input[ng-model='data.extraIncome.socialSecuritySpouse.val']")] ;  
-    var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
-	 for (var i = 0; i < startYears.length; i++) {
-        if ((parseInt(startYears[i][0].value) < currentYear) || (parseInt(startYears[i][0].value) >= parseInt(endYears[i][0].value))) {
-            yearsTrigger = false;
-        }
+	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
+	for (var i = 0; i < startYears.length; i++) {
+		if ((parseInt(startYears[i][0].value) < currentYear) || (parseInt(startYears[i][0].value) >= parseInt(endYears[i][0].value))) {
+			yearsTrigger = false;
+		}
 		if(((isNaN(parseInt(startYears[i][0].value))) || (isNaN(parseInt(endYears[i][0].value))))){
 			yearsTrigger = false;
 		}
 		if(parseFloat(values[i][0].value) < 0 || (isNaN(parseFloat(values[i][0].value)))){
 			valueTrigger = false;
 		}
-    }
+	}
 
-    if(yearsTrigger == true){
-    	$("#ssError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (yearsTrigger == false){
-    	$("#ssError").show();
-        $(".runSim").addClass("disabled");
-    }
+	if(yearsTrigger == true){
+		$("#ssError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (yearsTrigger == false){
+		$("#ssError").show();
+		$(".runSim").addClass("disabled");
+	}
 	if(valueTrigger == true){
-    	$("#ssValueError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (valueTrigger == false){
-    	$("#ssValueError").show();
-        $(".runSim").addClass("disabled");
-    }
+		$("#ssValueError").hide();
+		$(".runSim").removeClass("disabled");
+	}else if (valueTrigger == false){
+		$("#ssValueError").show();
+		$(".runSim").addClass("disabled");
+	}
 
 }
 $(document).on("keyup", "input[ng-model='data.extraIncome.socialSecurity.endYear']", function() {
-    cmpSS();
+	cmpSS();
 });
 $(document).on("keyup", "input[ng-model='data.extraIncome.socialSecurity.startYear']", function() {
-    cmpSS();
+	cmpSS();
 });
 $(document).on("keyup", "input[ng-model='data.extraIncome.socialSecurity.val']", function() {
-    cmpSS();
+	cmpSS();
 });
 $(document).on("keyup", "input[ng-model='data.extraIncome.socialSecuritySpouse.endYear']", function() {
-    cmpSS();
+	cmpSS();
 });
 $(document).on("keyup", "input[ng-model='data.extraIncome.socialSecuritySpouse.startYear']", function() {
-    cmpSS();
+	cmpSS();
 });
 $(document).on("keyup", "input[ng-model='data.extraIncome.socialSecuritySpouse.val']", function() {
-    cmpSS();
+	cmpSS();
 });
 
 //Data Options Validation
 function cmpDataOptions(){
-	var startYear = $("input[ng-model='data.data.start']");
-    var endYear = $("input[ng-model='data.data.end']");
-	var retirementStartYear = $("input[ng-model='data.retirementStartYear']");
-	var retirementEndYear = $("input[ng-model='data.retirementEndYear']");
-	var currentYear = new Date().getFullYear();
-	var rate = $("input[ng-model='data.data.growth']");
-	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
-	if ((parseInt(startYear[0].value) < 1871) || (parseInt(startYear[0].value) >= parseInt(endYear[0].value)) || (parseInt(endYear[0]) > currentYear)) {
-        yearsTrigger = false;
-	}
-	if(((isNaN(parseInt(startYear[0].value))) || (isNaN(parseInt(endYear[0].value))))){
+	var startYear = $("input[ng-model='data.data.start']")[0].value;
+	var endYear = $("input[ng-model='data.data.end']")[0].value;
+	var simulationStartYear = $("input[ng-model='data.simulationStartYear']")[0].value;
+	var retirementEndYear = $("input[ng-model='data.retirementEndYear']")[0].value;
+	var currentYear = Math.max.apply(null,Object.keys(Market));
+	var rate = $("input[ng-model='data.data.growth']")[0].value;
+	var singleStart = $("input[ng-model='data.data.singleStart']")[0].value;
+	var maxcape = $("input[ng-model='data.data.maxcape']")[0].value;
+	var mincape = $("input[ng-model='data.data.mincape']")[0].value;
+	var yearsTrigger = true, rateTrigger = true, yearTrigger = true, valueTrigger = true, capeTrigger = true;
+	if ((parseInt(startYear) < 1871) || (parseInt(startYear) >= parseInt(endYear)) || (parseInt(endYear) > currentYear)) {
 		yearsTrigger = false;
 	}
-	if(	(parseInt(endYear[0].value) - parseInt(startYear[0].value)) <  (parseInt(retirementEndYear[0].value) - parseInt(retirementStartYear[0].value))					){
+	if(((isNaN(parseInt(startYear))) || (isNaN(parseInt(endYear))))){
+		yearsTrigger = false;
+	}
+	if(	(parseInt(endYear) - parseInt(startYear)) <  (parseInt(retirementEndYear) - parseInt(retirementStartYear))					){
 		yearsTrigger = false;
 	}
 
-	if (((parseFloat(rate[0].value) < 0) || (isNaN(parseFloat(rate[0].value))))) {
+	if (((parseFloat(rate) < 0) || (isNaN(parseFloat(rate))))) {
 		rateTrigger = false;
 	}
 
-	if(yearsTrigger == true){
-    	$("#dataError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (yearsTrigger == false){
-    	$("#dataError").show();
-        $(".runSim").addClass("disabled");
-    }
-	if(rateTrigger == true){
-    	$("#dataRateError").hide();
-        $(".runSim").removeClass("disabled");
-    }else if (rateTrigger == false){
-    	$("#dataRateError").show();
-        $(".runSim").addClass("disabled");
-    }
+	if ((parseInt(singleStart) < 1871) || isNaN(parseInt(singleStart)) ||
+		(currentYear - parseInt(singleStart)) <  (parseInt(retirementEndYear) - parseInt(simulationStartYear))){
+		yearTrigger = false;
+	}
+
+	if ((parseFloat(mincape) < 0) || (parseFloat(maxcape) < 0) ||
+		(parseFloat(mincape) >= parseFloat(maxcape))) {
+		capeTrigger = false;
+	}
+
+	if(yearsTrigger){
+		$("#dataError").hide();
+		$(".runSim").removeClass("disabled");
+	}else{
+		$("#dataError").show();
+		$(".runSim").addClass("disabled");
+	}
+	if(rateTrigger){
+		$("#dataRateError").hide();
+		$(".runSim").removeClass("disabled");
+	}else{
+		$("#dataRateError").show();
+		$(".runSim").addClass("disabled");
+	}
+	if(yearTrigger){
+		$("#dataSingleYearError").hide();
+		$(".runSim").removeClass("disabled");
+	}else{
+		$("#dataSingleYearError").show();
+		$(".runSim").addClass("disabled");
+	}
+	if(capeTrigger){
+		$("#dataCapeError").hide();
+		$(".runSim").removeClass("disabled");
+	}else{
+		$("#dataCapeError").show();
+		$(".runSim").addClass("disabled");
+	}
 
 }
 $(document).on("keyup", "input[ng-model='data.data.start']", function() {
-    cmpDataOptions();
+	cmpDataOptions();
 });
 $(document).on("keyup", "input[ng-model='data.data.end']", function() {
-    cmpDataOptions();
+	cmpDataOptions();
 });
 $(document).on("keyup", "input[ng-model='data.data.growth']", function() {
-    cmpDataOptions();
+	cmpDataOptions();
+});
+$(document).on("keyup", "input[ng-model='data.data.singleStart']", function() {
+	cmpDataOptions();
+});
+$(document).on("keyup", "input[ng-model='data.data.mincape']", function() {
+	cmpDataOptions();
+});
+$(document).on("keyup", "input[ng-model='data.data.maxcape']", function() {
+	cmpDataOptions();
 });
