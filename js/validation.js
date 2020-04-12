@@ -131,10 +131,10 @@ $(document).ready(function() {
 
 	//Retirement Years Validation
 	function cmpYears(){
-		var startYear = parseInt($("input[ng-model='data.retirementStartYear']").val());
+		var simulationStartYear = parseInt($("input[ng-model='data.simulationStartYear']").val());
+		var retirementStartYear = parseInt($("input[ng-model='data.retirementStartYear']").val());
 		var endYear = parseInt($("input[ng-model='data.retirementEndYear']").val());
-		var currentYear = new Date().getFullYear();
-		if((startYear < endYear) && (startYear >= currentYear)){
+		if((retirementStartYear < endYear) && (retirementStartYear >= simulationStartYear)){
 			return true;
 		}else{
 			return false;
