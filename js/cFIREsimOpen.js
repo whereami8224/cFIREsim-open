@@ -100,7 +100,7 @@ var Simulation = {
 		this.tabs++;
 		console.log("Form Data:", form);
 		this.sim = []; //Deletes previous simulation values if they exist.
-		var startYear = new Date().getFullYear();
+		var startYear = form.simulationStartYear;
 		var endYear = form.retirementEndYear;
 		var cycleLength = endYear - startYear + 1;
 		var numCycles = 0;

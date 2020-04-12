@@ -294,6 +294,7 @@
                                 <span class="sr-only">Error:</span>
                                 Retirement Start must be >= Current Year. Retirement Start must be before Retirement End.
                             </div>
+														<label>Simulation Start Year:<input type="text" class="form-control toot" ng-model="data.simulationStartYear" id="simulationStartYear"></label>
                             <label>Retirement Year:<input type="text" class="form-control toot" ng-model="data.retirementStartYear" id="retirementStartYear"></label>
                             <label>Retirement End Year:<input type="text" class="form-control" ng-model="data.retirementEndYear" id="retirementEndYear"></label>
                             <label>Retirement Length:<input type="text" class="form-control" readonly value="{{ data.retirementEndYear - data.retirementStartYear }}" id="retirementLength"></label>
@@ -1579,6 +1580,7 @@
         .controller('simulationInputController', ['$scope',
             function ($scope) {
                 $scope.data = {
+										simulationStartYear: new Date().getFullYear(),
                     retirementStartYear: new Date().getFullYear(),
                     retirementEndYear: new Date().getFullYear() + 30,
                     data: {
