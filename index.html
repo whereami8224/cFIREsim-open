@@ -1582,7 +1582,7 @@
         .controller('simulationInputController', ['$scope',
             function ($scope) {
                 $scope.data = {
-										simulationStartYear: new Date().getFullYear(),
+                    simulationStartYear: new Date().getFullYear(),
                     retirementStartYear: new Date().getFullYear(),
                     retirementEndYear: new Date().getFullYear() + 30,
                     data: {
@@ -1592,7 +1592,7 @@
                         growth: 8,
                         singleStart: 1966,
                         maxcape: null,
-                        mincape:null
+                        mincape: null
                     },
                     investigate: {
                         type: "none",
@@ -1753,6 +1753,13 @@
                 {
                     text: 'Max Initial Spending',
                     value: 'maxInitialSpending',
+                    formInputs: [
+                        'maxInitialSpendingOptions'
+                    ]
+                },
+                {
+                    text: 'Retirement Year',
+                    value: 'retirementYear',
                     formInputs: [
                         'maxInitialSpendingOptions'
                     ]
@@ -1970,7 +1977,7 @@
                     }
                 }
                 $scope.refreshInvestigateForm = function () {
-                    if ($scope.data.investigate.type == "maxInitialSpending") {
+                    if ($scope.data.investigate.type == "maxInitialSpending" || $scope.data.investigate.type == "retirementYear") {
                         $('#maxInitialSpendingOptions').show();
                     } else {
                         $('#maxInitialSpendingOptions').hide();

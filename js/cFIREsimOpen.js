@@ -563,6 +563,39 @@ var Simulation = {
 					break;
 				}
 			}
+		} else if (form.investigate.type == 'retirementYear') {
+			var min = form.simulationStartYear,
+				max = form.retirementEndYear;
+			while (min <= max) {
+				form.retirementStartYear = min;
+				for (var i = 0; i < this.sim.length; i++) {
+					for (var j = 0; j < this.sim[i].length; j++) {
+						this.calcStartPortfolio(form, i, j); //Return Starting portfolio value to kick off yearly simulation cycles
+						this.calcSumOfAdjustments(form, i, j);
+						this.calcSpending(form, i, j); //Nominal spending for this specific cycle
+						this.calcMarketGains(form, i, j); //Calculate market gains on portfolio based on allocation from form and data points
+						this.calcEndPortfolio(form, i, j); //Sum up ending portfolio
+					}
+				}
+				var failures = this.calcFailures(this.sim);
+				var success = (failures.totalCycles - failures.totalFailures) / failures.totalCycles;
+				if (success < (form.investigate.successRate / 100)) {
+					min++;
+				} else {
+					var html = "<b>Investigate Retirement Year</b>: Considering all other inputs, the earliest retirement year would be <b style='color:#AAFF69'>" + min + "</b>.";
+					//Run post-simulation functions
+					this.convertToCSV(this.sim);
+					this.calcFailures(this.sim);
+					this.displayGraph(this.sim, form);
+
+					//Initialize statistics calculations
+					StatsModule.init(this.sim, form);
+
+					//Display Investigation Results
+					$("#graph" + Simulation.tabs).parent().prepend(html);
+					break;
+				}
+			}
 		}
 	},
 	displayGraph: function(results, form) {
