@@ -1756,6 +1756,13 @@
                     formInputs: [
                         'maxInitialSpendingOptions'
                     ]
+                },
+                {
+                    text: 'Retirement Year',
+                    value: 'retirementYear',
+                    formInputs: [
+                        'maxInitialSpendingOptions'
+                    ]
                 }]
                 $scope.rebalanceAnnuallyOptionsTypes = [{
                     text: 'None',
@@ -1970,7 +1977,7 @@
                     }
                 }
                 $scope.refreshInvestigateForm = function () {
-                    if ($scope.data.investigate.type == "maxInitialSpending") {
+                    if ($scope.data.investigate.type == "maxInitialSpending" || $scope.data.investigate.type == "retirementYear") {
                         $('#maxInitialSpendingOptions').show();
                     } else {
                         $('#maxInitialSpendingOptions').hide();
