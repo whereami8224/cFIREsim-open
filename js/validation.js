@@ -140,6 +140,15 @@ $(document).ready(function() {
 			return false;
 		}
 	}
+	$("input[ng-model='data.simulationStartYear']").keyup(function() {
+		if(cmpYears()){
+			$("#yearsError").hide();
+			$(".runSim").removeClass("disabled");
+		}else{
+			$("#yearsError").show();
+			$(".runSim").addClass("disabled");
+		}
+	});
 	$("input[ng-model='data.retirementStartYear']").keyup(function() {
 		if(cmpYears()){
 			$("#yearsError").hide();
