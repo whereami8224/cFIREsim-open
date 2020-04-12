@@ -292,11 +292,14 @@
                         <div class="panel-body">
                             <div class="alert alert-danger" role="alert" id="yearsError" style="display:none">
                                 <span class="sr-only">Error:</span>
-                                Retirement Start must be >= Current Year. Retirement Start must be before Retirement End.
+                                Retirement Start must be >= Simulation Start. Retirement Start must be before Retirement End.
                             </div>
+														<label>Simulation Start Year:<input type="text" class="form-control toot" ng-model="data.simulationStartYear" id="simulationStartYear"></label>
                             <label>Retirement Year:<input type="text" class="form-control toot" ng-model="data.retirementStartYear" id="retirementStartYear"></label>
                             <label>Retirement End Year:<input type="text" class="form-control" ng-model="data.retirementEndYear" id="retirementEndYear"></label>
-                            <label>Retirement Length:<input type="text" class="form-control" readonly value="{{ data.retirementEndYear - data.retirementStartYear }}" id="retirementLength"></label>
+                            <p>Pre-retirement length = {{ data.retirementStartYear - data.simulationStartYear }} years.</p>
+                            <p>Retirement length = {{ data.retirementEndYear - data.retirementStartYear }} years.</p>
+                            <p>Total simulation length = {{ data.retirementEndYear - data.simulationStartYear }} years.</p>
                             <!-- cFIREsim Open -->
                         </div>
                     </div>
@@ -1579,6 +1582,7 @@
         .controller('simulationInputController', ['$scope',
             function ($scope) {
                 $scope.data = {
+                    simulationStartYear: new Date().getFullYear(),
                     retirementStartYear: new Date().getFullYear(),
                     retirementEndYear: new Date().getFullYear() + 30,
                     data: {
@@ -1588,7 +1592,7 @@
                         growth: 8,
                         singleStart: 1966,
                         maxcape: null,
-                        mincape:null
+                        mincape: null
                     },
                     investigate: {
                         type: "none",
@@ -1749,6 +1753,13 @@
                 {
                     text: 'Max Initial Spending',
                     value: 'maxInitialSpending',
+                    formInputs: [
+                        'maxInitialSpendingOptions'
+                    ]
+                },
+                {
+                    text: 'Retirement Year',
+                    value: 'retirementYear',
                     formInputs: [
                         'maxInitialSpendingOptions'
                     ]
@@ -1966,7 +1977,7 @@
                     }
                 }
                 $scope.refreshInvestigateForm = function () {
-                    if ($scope.data.investigate.type == "maxInitialSpending") {
+                    if ($scope.data.investigate.type == "maxInitialSpending" || $scope.data.investigate.type == "retirementYear") {
                         $('#maxInitialSpendingOptions').show();
                     } else {
                         $('#maxInitialSpendingOptions').hide();
