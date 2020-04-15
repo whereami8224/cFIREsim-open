@@ -969,28 +969,28 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th id="i_label">
                                                     Label
                                                 </th>
-                                                <th>
+                                                <th id="i_amount">
                                                     Amount ($)
                                                 </th>
-                                                <th>
+                                                <th id="i_type">
                                                     Recurring
                                                 </th>
-                                                <th>
-                                                    Start year
+                                                <th id="i_syear">
+                                                    Start Year
                                                 </th>
-                                                <th>
+                                                <th id="i_eyear">
                                                     End Year
                                                 </th>
-                                                <th>
+                                                <th id="i_infadj">
                                                     Inflation Adjusted
                                                 </th>
-                                                <th>
+                                                <th id="i_inftyp">
                                                     Inflation Type
                                                 </th>
-                                                <th>
+                                                <th id="i_infrate">
                                                     Inflation %
                                                 </th>
                                                 <th>
@@ -1000,44 +1000,49 @@
                                         <tbody>
                                             <tr ng-repeat="extraSaving in data.extraIncome.extraSavings">
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSaving.label">
+                                                    <input type="text" class="form-control" ng-model="extraSaving.label" aria-labelledby="i_label">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSaving.val">
+                                                    <input type="text" class="form-control" ng-model="extraSaving.val" aria-labelledby="i_amount">
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="extraSaving.recurring"
                                                             ng-options="bool for bool in boolOptions"
-                                                            ng-change="clearEndYear($index, data.extraIncome.extraSavings)"></select>
+                                                            ng-change="clearEndYear($index, data.extraIncome.extraSavings)"
+                                                            aria-labelledby="i_type"></select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSaving.startYear">
+                                                    <input type="text" class="form-control" ng-model="extraSaving.startYear" aria-labelledby="i_syear">
                                                 </td>
                                                 <td>
                                                     <input type="text"
                                                            class="form-control"
                                                            ng-model="extraSaving.endYear"
-                                                           ng-disabled="!extraSaving.recurring">
+                                                           ng-disabled="!extraSaving.recurring"
+                                                           aria-labelledby="i_eyear">
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="extraSaving.inflationAdjusted"
                                                             ng-options="bool for bool in boolOptions"
-                                                            ng-change="changeInflationAdjusted($index, data.extraIncome.extraSavings)"></select>
+                                                            ng-change="changeInflationAdjusted($index, data.extraIncome.extraSavings)"
+                                                            aria-labelledby="i_infadj"></select>
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="extraSaving.inflationType"
                                                             ng-options="option.value as option.text for option in inflationTypes"
                                                             ng-change="changeInflationType($index, data.extraIncome.extraSavings)"
-                                                            ng-disabled="!extraSaving.inflationAdjusted"></select>
+                                                            ng-disabled="!extraSaving.inflationAdjusted"
+                                                            aria-labelledby="i_inftyp"></select>
                                                 </td>
                                                 <td>
                                                     <input type="text"
                                                            class="form-control"
                                                            ng-model="extraSaving.inflationRate"
-                                                           ng-disabled="extraSaving.inflationType != 'constant' || !extraSaving.inflationAdjusted">
+                                                           ng-disabled="extraSaving.inflationType != 'constant' || !extraSaving.inflationAdjusted"
+                                                           aria-labelledby="i_infrate">
                                                 </td>
                                                 <td>
                                                     <input type="button" ng-click="removeObject($index, data.extraIncome.extraSavings)" value="Delete" />
@@ -1077,28 +1082,28 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th id="s_label">
                                                     Label
                                                 </th>
-                                                <th>
+                                                <th id="s_amount">
                                                     Amount ($)
                                                 </th>
-                                                <th>
+                                                <th id="s_type">
                                                     Recurring
                                                 </th>
-                                                <th>
-                                                    Start year
+                                                <th id="s_syear">
+                                                    Start Year
                                                 </th>
-                                                <th>
+                                                <th id="s_eyear">
                                                     End Year
                                                 </th>
-                                                <th>
+                                                <th id="s_infadj">
                                                     Inflation Adjusted
                                                 </th>
-                                                <th>
+                                                <th id="s_inftyp">
                                                     Inflation Type
                                                 </th>
-                                                <th>
+                                                <th id="s_infrate">
                                                     Inflation %
                                                 </th>
                                                 <th>
@@ -1108,44 +1113,52 @@
                                         <tbody>
                                             <tr ng-repeat="extraSpending in data.extraSpending">
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSpending.label">
+                                                    <input type="text" class="form-control" ng-model="extraSpending.label" aria-labelledby="s_label">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSpending.val">
+                                                    <input type="text" class="form-control" ng-model="extraSpending.val" aria-labelledby="s_amount">
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="extraSpending.recurring"
                                                             ng-options="bool for bool in boolOptions"
-                                                            ng-change="clearEndYear($index, data.extraSpending)"></select>
+                                                            ng-change="clearEndYear($index, data.extraSpending)"
+                                                            aria-labelledby="s_type"></select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSpending.startYear">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           ng-model="extraSpending.startYear"
+                                                           aria-labelledby="s_syear">
                                                 </td>
                                                 <td>
                                                     <input type="text"
                                                            class="form-control"
                                                            ng-model="extraSpending.endYear"
-                                                           ng-disabled="!extraSpending.recurring">
+                                                           ng-disabled="!extraSpending.recurring"
+                                                           aria-labelledby="s_eyear">
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="extraSpending.inflationAdjusted"
                                                             ng-options="bool for bool in boolOptions"
-                                                            ng-change="changeInflationAdjusted($index, data.extraSpending)"></select>
+                                                            ng-change="changeInflationAdjusted($index, data.extraSpending)"
+                                                            aria-labelledby="s_infadj"></select>
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="extraSpending.inflationType"
                                                             ng-options="option.value as option.text for option in inflationTypes"
                                                             ng-change="changeInflationType($index, data.extraSpending)"
-                                                            ng-disabled="!extraSpending.inflationAdjusted"></select>
+                                                            ng-disabled="!extraSpending.inflationAdjusted"
+                                                            aria-labelledby="s_inftyp"></select>
                                                 </td>
                                                 <td>
                                                     <input type="text"
                                                            class="form-control"
                                                            ng-model="extraSpending.inflationRate"
-                                                           ng-disabled="extraSpending.inflationType != 'constant' || !extraSpending.inflationAdjusted">
+                                                           ng-disabled="extraSpending.inflationType != 'constant' || !extraSpending.inflationAdjusted"
+                                                           aria-labelledby="s_infrate">
                                                 </td>
                                                 <td>
                                                     <input type="button" ng-click="removeObject($index, data.extraSpending)" value="Delete" />
