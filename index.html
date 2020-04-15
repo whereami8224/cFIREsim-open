@@ -885,22 +885,22 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th id="p_label">
                                                     Label
                                                 </th>
-                                                <th>
+                                                <th id="p_amount">
                                                     Amount ($)
                                                 </th>
-                                                <th>
+                                                <th id="p_year">
                                                     Start Year
                                                 </th>
-                                                <th>
+                                                <th id="p_infadj">
                                                     Inflation Adjusted
                                                 </th>
-                                                <th>
+                                                <th id="p_inftyp">
                                                     Inflation Type
                                                 </th>
-                                                <th>
+                                                <th id="p_infrate">
                                                     Inflation %
                                                 </th>
                                                 <th>
@@ -910,32 +910,35 @@
                                         <tbody>
                                             <tr ng-repeat="pension in data.extraIncome.pensions">
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="pension.label">
+                                                    <input type="text" class="form-control" ng-model="pension.label" aria-labelledby="p_label">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="pension.val">
+                                                    <input type="text" class="form-control" ng-model="pension.val" aria-labelledby="p_amount">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="pension.startYear">
+                                                    <input type="text" class="form-control" ng-model="pension.startYear" aria-labelledby="p_amount">
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="pension.inflationAdjusted"
                                                             ng-options="bool for bool in boolOptions"
-                                                            ng-change="changeInflationAdjusted($index, data.extraIncome.pensions)"></select>
+                                                            ng-change="changeInflationAdjusted($index, data.extraIncome.pensions)"
+                                                            aria-labelledby="p_infadj"></select>
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
                                                             ng-model="pension.inflationType"
                                                             ng-options="option.value as option.text for option in inflationTypes"
                                                             ng-change="changeInflationType($index, data.extraIncome.pensions)"
-                                                            ng-disabled="!pension.inflationAdjusted"></select>
+                                                            ng-disabled="!pension.inflationAdjusted"
+                                                            aria-labelledby="p_inftyp"></select>
                                                 </td>
                                                 <td>
                                                     <input type="text"
                                                            class="form-control"
                                                            ng-model="pension.inflationRate"
-                                                           ng-disabled="pension.inflationType != 'constant' || !pension.inflationAdjusted">
+                                                           ng-disabled="pension.inflationType != 'constant' || !pension.inflationAdjusted"
+                                                           aria-labelledby="p_infrate">
                                                 </td>
                                                 <td>
                                                     <input type="button" ng-click="removeObject($index, data.extraIncome.pensions)" value="Delete" />
