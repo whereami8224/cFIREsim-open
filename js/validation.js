@@ -3,17 +3,17 @@ $(document).ready(function() {
 	//Validation Rules
 	//Allocations add up to 100%
 	function cmpAllocation(){
-		var equities = parseFloat($("input[ng-model='data.portfolio.percentEquities']").val());
-		var bonds = parseFloat($("input[ng-model='data.portfolio.percentBonds']").val());
-		var gold = parseFloat($("input[ng-model='data.portfolio.percentGold']").val());
-		var cash = parseFloat($("input[ng-model='data.portfolio.percentCash']").val());
+		var equities = parseFloat($("#initialEquities").val());
+		var bonds = parseFloat($("#initialBonds").val());
+		var gold = parseFloat($("#initialGold").val());
+		var cash = parseFloat($("#initialCash").val());
 		if(equities + bonds + gold + cash == 100){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	$("input[ng-model='data.portfolio.percentEquities']").keyup(function() {
+	$("#initialEquities").keyup(function() {
 		if(cmpAllocation()){
 			$("#allocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -22,7 +22,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.portfolio.percentBonds']").keyup(function() {
+	$("#initialBonds").keyup(function() {
 		if(cmpAllocation()){
 			$("#allocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -31,7 +31,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.portfolio.percentGold']").keyup(function() {
+	$("#initialGold").keyup(function() {
 		if(cmpAllocation()){
 			$("#allocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -40,7 +40,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.portfolio.percentCash']").keyup(function() {
+	$("#initialCash").keyup(function() {
 		if(cmpAllocation()){
 			$("#allocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -52,17 +52,17 @@ $(document).ready(function() {
 	
 	//Target Assets allocation add up to 100%
 	function cmpTargetAllocation(){
-		var equities = parseFloat($("input[ng-model='data.portfolio.targetPercentEquities']").val());
-		var bonds = parseFloat($("input[ng-model='data.portfolio.targetPercentBonds']").val());
-		var gold = parseFloat($("input[ng-model='data.portfolio.targetPercentGold']").val());
-		var cash = parseFloat($("input[ng-model='data.portfolio.targetPercentCash']").val());
+		var equities = parseFloat($("#targetEquities").val());
+		var bonds = parseFloat($("#targetBonds").val());
+		var gold = parseFloat($("#targetGold").val());
+		var cash = parseFloat($("#targetCash").val());
 		if(equities + bonds + gold + cash == 100){
 			return true;
 		}else{
 			return false;
 		}
 	}
-		$("input[ng-model='data.portfolio.targetPercentEquities']").keyup(function() {
+		$("#targetEquities']").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.portfolio.targetPercentBonds']").keyup(function() {
+	$("#targetBonds']").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -80,7 +80,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.portfolio.targetPercentGold']").keyup(function() {
+	$("#targetGold']").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -89,7 +89,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.portfolio.targetPercentCash']").keyup(function() {
+	$("#targetCash']").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -131,16 +131,16 @@ $(document).ready(function() {
 
 	//Retirement Years Validation
 	function cmpYears(){
-		var simulationStartYear = parseInt($("input[ng-model='data.simulationStartYear']").val());
-		var retirementStartYear = parseInt($("input[ng-model='data.retirementStartYear']").val());
-		var endYear = parseInt($("input[ng-model='data.retirementEndYear']").val());
+		var simulationStartYear = parseInt($("#simulationStartYear").val());
+		var retirementStartYear = parseInt($("#retirementStartYear").val());
+		var endYear = parseInt($("retirementEndYear").val());
 		if((retirementStartYear < endYear) && (retirementStartYear >= simulationStartYear)){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	$("input[ng-model='data.simulationStartYear']").keyup(function() {
+	$("simulationStartYear").keyup(function() {
 		if(cmpYears()){
 			$("#yearsError").hide();
 			$(".runSim").removeClass("disabled");
@@ -149,7 +149,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.retirementStartYear']").keyup(function() {
+	$("#retirementStartYear").keyup(function() {
 		if(cmpYears()){
 			$("#yearsError").hide();
 			$(".runSim").removeClass("disabled");
@@ -158,7 +158,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.retirementEndYear']").keyup(function() {
+	$("#retirementEndYear").keyup(function() {
 		if(cmpYears()){
 			$("#yearsError").hide();
 			$(".runSim").removeClass("disabled");
@@ -170,14 +170,14 @@ $(document).ready(function() {
 	
 	//Initial Portfolio Validation
 	function cmpPortfolio(){
-		var portfolio = parseFloat($("input[ng-model='data.portfolio.initial']").val());
+		var portfolio = parseFloat($("#portfolioInitial").val());
 		if((portfolio >= 0) && !(isNaN(portfolio))){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	$("input[ng-model='data.portfolio.initial']").keyup(function() {
+	$("#portfolioInitial").keyup(function() {
 		if(cmpPortfolio()){
 			$("#portfolioError").hide();
 			$(".runSim").removeClass("disabled");
@@ -190,14 +190,14 @@ $(document).ready(function() {
 
 	//Spending Validation
 	function cmpInitialSpending(){
-		var spending = parseFloat($("input[ng-model='data.spending.initial']").val());
+		var spending = parseFloat($("#initialSpending").val());
 		if((spending >= 0) && !(isNaN(spending))){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	$("input[ng-model='data.spending.initial']").keyup(function() {
+	$("#initialSpending").keyup(function() {
 		if(cmpInitialSpending()){
 			$("#initialSpendingError").hide();
 			$(".runSim").removeClass("disabled");

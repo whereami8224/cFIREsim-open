@@ -410,7 +410,7 @@
                                 <span class="sr-only">Error:</span>
                                 Portfolio must be a positive number.
                             </div>
-                            <label>Portfolio Value:<input type="number" class="form-control" ng-model="data.portfolio.initial"></label>
+                            <label>Portfolio Value:<input type="number" class="form-control" ng-model="data.portfolio.initial" id="portfolioInitial"></label>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Initial Assets
@@ -425,7 +425,7 @@
                                             <label>
                                                 Equities:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentEquities">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentEquities" id="initialEquities">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -434,7 +434,7 @@
                                             <label>
                                                 Bonds:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentBonds">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentBonds" id="initialBonds">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -445,7 +445,7 @@
                                             <label>
                                                 Gold:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentGold">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentGold" id="initialGold">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -454,7 +454,7 @@
                                             <label>
                                                 Cash:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentCash">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.percentCash" id="initialCash">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -526,7 +526,7 @@
                                             <label>
                                                 Equities:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentEquities">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentEquities" id="targetEquities">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -535,7 +535,7 @@
                                             <label>
                                                 Bonds:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentBonds">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentBonds" id="targetBonds">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -546,7 +546,7 @@
                                             <label>
                                                 Gold:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentGold">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentGold"  id="targetGold">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -555,7 +555,7 @@
                                             <label>
                                                 Cash:
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentCash">
+                                                    <input type="text" class="form-control" ng-model="data.portfolio.targetPercentCash"  id="targetCash">
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </label>
@@ -588,7 +588,7 @@
                                     Initial Yearly Spending:
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input type="text" class="form-control" ng-model="data.spending.initial">
+                                        <input type="text" class="form-control" ng-model="data.spending.initial" id="initialSpending">
                                     </div>
                                 </label>
                             </div>
