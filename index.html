@@ -512,13 +512,13 @@
                                         <div class="col-md-6">
                                             <label>
                                                 Start Year:
-                                                <input type="text" class="form-control" ng-model="data.portfolio.changeAllocationStartYear">
+                                                <input type="text" class="form-control" ng-model="data.portfolio.changeAllocationStartYear" id="changeAllocationStartYear">
                                             </label>
                                         </div>
                                         <div class="col-md-6">
                                             <label>
                                                 End Year:
-                                                <input type="text" class="form-control" ng-model="data.portfolio.changeAllocationEndYear">
+                                                <input type="text" class="form-control" ng-model="data.portfolio.changeAllocationEndYear" id="changeAllocationEndYear">
                                             </label>
                                         </div>
                                     </div><div class="row">
@@ -912,13 +912,14 @@
                                         <tbody>
                                             <tr ng-repeat="pension in data.extraIncome.pensions">
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="pension.label" aria-labelledby="p_label">
+                                                    <input type="text" class="form-control" ng-model="pension.label" aria-labelledby="p_label" name="pensionLabel[]">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="pension.val" aria-labelledby="p_amount">
+                                                    <input type="text" class="form-control" ng-model="pension.val" aria-labelledby="p_amount"  name="pensionAmount[]">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="pension.startYear" aria-labelledby="p_amount">
+                                                    <input type="text" class="form-control" ng-model="pension.startYear" aria-labelledby="p_year"
+                                                     name="pensionYear[]">
                                                 </td>
                                                 <td>
                                                     <select class="form-control"

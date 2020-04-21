@@ -62,7 +62,7 @@ $(document).ready(function() {
 			return false;
 		}
 	}
-		$("#targetEquities']").keyup(function() {
+		$("#targetEquities").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("#targetBonds']").keyup(function() {
+	$("#targetBonds").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -80,7 +80,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("#targetGold']").keyup(function() {
+	$("#targetGold").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -89,7 +89,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("#targetCash']").keyup(function() {
+	$("#targetCash").keyup(function() {
 		if(cmpTargetAllocation()){
 			$("#targetAllocationError").hide();
 			$(".runSim").removeClass("disabled");
@@ -101,16 +101,16 @@ $(document).ready(function() {
 	
 	//Target Asset Years
 	function cmpTargetYears(){
-		var startYear = parseInt($("input[ng-model='data.portfolio.changeAllocationStartYear']").val());
-		var endYear = parseInt($("input[ng-model='data.portfolio.changeAllocationEndYear']").val());
-		var currentYear = new Date().getFullYear();
-		if((startYear < endYear) && (startYear >= currentYear)){
+		var startYear = parseInt($("#changeAllocationStartYear").val());
+		var endYear = parseInt($("#changeAllocationEndYear").val());
+		var simulationStartYear = parseInt($("#simulationStartYear").val());
+		if((startYear < endYear) && (startYear >= simulationStartYear)){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	$("input[ng-model='data.portfolio.changeAllocationStartYear']").keyup(function() {
+	$("#changeAllocationStartYear").keyup(function() {
 		if(cmpTargetYears()){
 			$("#targetAllocationYearsError").hide();
 			$(".runSim").removeClass("disabled");
@@ -119,7 +119,7 @@ $(document).ready(function() {
 			$(".runSim").addClass("disabled");
 		}
 	});
-	$("input[ng-model='data.portfolio.changeAllocationEndYear']").keyup(function() {
+	$("#changeAllocationEndYear").keyup(function() {
 		if(cmpTargetYears()){
 			$("#targetAllocationYearsError").hide();
 			$(".runSim").removeClass("disabled");
@@ -133,14 +133,14 @@ $(document).ready(function() {
 	function cmpYears(){
 		var simulationStartYear = parseInt($("#simulationStartYear").val());
 		var retirementStartYear = parseInt($("#retirementStartYear").val());
-		var endYear = parseInt($("retirementEndYear").val());
+		var endYear = parseInt($("#retirementEndYear").val());
 		if((retirementStartYear < endYear) && (retirementStartYear >= simulationStartYear)){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	$("simulationStartYear").keyup(function() {
+	$("#simulationStartYear").keyup(function() {
 		if(cmpYears()){
 			$("#yearsError").hide();
 			$(".runSim").removeClass("disabled");
@@ -215,12 +215,12 @@ $(document).ready(function() {
 function cmpPensions() {
 	var startYears = $("input[ng-model='pension.startYear']");
 	var values = $("input[ng-model='pension.val']");
-	var currentYear = new Date().getFullYear();
+	var simulationStartYear = parseInt($("#simulationStartYear").val());
 	var inflRate = $("input[ng-model='pension.inflationRate']");
 	var inflType = $("select[ng-model='pension.inflationType']");
 	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
 	for (var i = 0; i < startYears.length; i++) {
-		if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value)))) {
+		if ((parseInt(startYears[i].value) < simulationStartYear) || (isNaN(parseInt(startYears[i].value)))) {
 			yearsTrigger = false;
 		}
 		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
@@ -273,14 +273,14 @@ $(document).on('change',"select[ng-model='pension.inflationType']",  function() 
 function cmpExtraSpending() {
 	var startYears = $("input[ng-model='extraSpending.startYear']");
 	var endYears = $("input[ng-model='extraSpending.endYear']");
-	var currentYear = new Date().getFullYear();
+	var simulationStartYear = parseInt($("#simulationStartYear").val());
 	var values = $("input[ng-model='extraSpending.val']");
 	var inflRate = $("input[ng-model='extraSpending.inflationRate']");
 	var inflType = $("select[ng-model='extraSpending.inflationType']");
 	var recurring = $("select[ng-model='extraSpending.recurring']");
 	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
 	for (var i = 0; i < startYears.length; i++) {
-		if ((parseInt(startYears[i].value) < currentYear) || (isNaN(parseInt(startYears[i].value))) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
+		if ((parseInt(startYears[i].value) < simulationStartYear) || (isNaN(parseInt(startYears[i].value))) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
 			yearsTrigger = false;
 		}
 		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
@@ -342,14 +342,14 @@ $(document).on('change',"select[ng-model='extraSpending.recurring']",  function(
 function cmpExtraIncome() {
 	var startYears = $("input[ng-model='extraSaving.startYear']");
 	var endYears = $("input[ng-model='extraSaving.endYear']");
-	var currentYear = new Date().getFullYear();
+	var simulationStartYear = parseInt($("#simulationStartYear").val());
 	var values = $("input[ng-model='extraSaving.val']");
 	var inflRate = $("input[ng-model='extraSaving.inflationRate']");
 	var inflType = $("select[ng-model='extraSaving.inflationType']");
 	var recurring = $("select[ng-model='extraSaving.recurring']");
 	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
 	for (var i = 0; i < startYears.length; i++) {
-		if ((parseInt(startYears[i].value) < currentYear) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
+		if ((parseInt(startYears[i].value) < simulationStartYear) || (parseInt(startYears[i].value) >= parseInt(endYears[i].value))) {
 			yearsTrigger = false;
 		}
 		if(((isNaN(parseInt(startYears[i].value))) || (isNaN(parseInt(endYears[i].value)))) && recurring[i].value == 0){
@@ -410,11 +410,11 @@ $(document).on('change',"select[ng-model='extraSaving.recurring']",  function() 
 function cmpSS(){
 	var startYears = [$("input[ng-model='data.extraIncome.socialSecurity.startYear']"), $("input[ng-model='data.extraIncome.socialSecuritySpouse.startYear']")] ;
 	var endYears = [$("input[ng-model='data.extraIncome.socialSecurity.endYear']"), $("input[ng-model='data.extraIncome.socialSecuritySpouse.endYear']")] ;    
-	var currentYear = new Date().getFullYear();
+	var simulationStartYear = parseInt($("#simulationStartYear").val());
 	var values = [$("input[ng-model='data.extraIncome.socialSecurity.val']"), $("input[ng-model='data.extraIncome.socialSecuritySpouse.val']")] ;  
 	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
 	for (var i = 0; i < startYears.length; i++) {
-		if ((parseInt(startYears[i][0].value) < currentYear) || (parseInt(startYears[i][0].value) >= parseInt(endYears[i][0].value))) {
+		if ((parseInt(startYears[i][0].value) < simulationStartYear) || (parseInt(startYears[i][0].value) >= parseInt(endYears[i][0].value))) {
 			yearsTrigger = false;
 		}
 		if(((isNaN(parseInt(startYears[i][0].value))) || (isNaN(parseInt(endYears[i][0].value))))){
