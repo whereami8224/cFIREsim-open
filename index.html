@@ -926,6 +926,7 @@
                                                             ng-model="pension.inflationAdjusted"
                                                             ng-options="bool for bool in boolOptions"
                                                             ng-change="changeInflationAdjusted($index, data.extraIncome.pensions)"
+                                                            name="pensionInflationAdjusted[]"
                                                             aria-labelledby="p_infadj"></select>
                                                 </td>
                                                 <td>
@@ -934,6 +935,7 @@
                                                             ng-options="option.value as option.text for option in inflationTypes"
                                                             ng-change="changeInflationType($index, data.extraIncome.pensions)"
                                                             ng-disabled="!pension.inflationAdjusted"
+                                                            name="pensionInflationType[]"
                                                             aria-labelledby="p_inftyp"></select>
                                                 </td>
                                                 <td>
@@ -941,6 +943,7 @@
                                                            class="form-control"
                                                            ng-model="pension.inflationRate"
                                                            ng-disabled="pension.inflationType != 'constant' || !pension.inflationAdjusted"
+                                                           name="pensionInflationRate[]"
                                                            aria-labelledby="p_infrate">
                                                 </td>
                                                 <td>

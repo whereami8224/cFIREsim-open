@@ -213,17 +213,21 @@ $(document).ready(function() {
 
 //Pensions Validation
 function cmpPensions() {
-	var startYears = $("input[ng-model='pension.startYear']");
-	var values = $("input[ng-model='pension.val']");
+	var startYears = $('input[name^=pensionYear]').map(function(idx, elem) {
+		return parseInt($(elem).val());
+	}).get();
+	var values = $('input[name^=pensionAmount]').map(function(idx, elem) {
+		return parseFloat($(elem).val());
+	}).get();
 	var simulationStartYear = parseInt($("#simulationStartYear").val());
 	var inflRate = $("input[ng-model='pension.inflationRate']");
 	var inflType = $("select[ng-model='pension.inflationType']");
 	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
 	for (var i = 0; i < startYears.length; i++) {
-		if ((parseInt(startYears[i].value) < simulationStartYear) || (isNaN(parseInt(startYears[i].value)))) {
+		if ((startYears[i] < simulationStartYear) || (isNaN(startYears[i]))) {
 			yearsTrigger = false;
 		}
-		if(parseFloat(values[i].value) < 0 || (isNaN(parseFloat(values[i].value)))){
+		if(values[i] < 0 || (isNaN(values[i]))){
 			valueTrigger = false;
 		}
 	}
