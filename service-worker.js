@@ -14,7 +14,7 @@ var version = 'v1::';
    then the service worker won't be installed either.
 */
 var offlineFundamentals = [
-  '',
+  './',
   './css/bootstrap.min.css',
   './css/bootstrap-select.min.css',
   
@@ -25,14 +25,14 @@ var offlineFundamentals = [
   './js/marketData.js',
   './js/spendingModule.js',
   './js/statsModule.js',
-  './js/validation.js'
+  './js/validation.js',
   
   
   // These might not work. Need to work out the correct way to include them.
- 'https://cdn.datatables.net/r/bs/dt-1.10.8/datatables.min.css',
+  'https://cdn.datatables.net/r/bs/dt-1.10.8/datatables.min.css',
   
   'https://code.jquery.com/jquery-3.4.1.min.js',
-  '//cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js',
   'https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js',
   'https://cdn.datatables.net/r/bs/dt-1.10.8/datatables.min.js'
   
