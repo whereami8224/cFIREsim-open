@@ -220,8 +220,12 @@ function cmpPensions() {
 		return parseFloat($(elem).val());
 	}).get();
 	var simulationStartYear = parseInt($("#simulationStartYear").val());
-	var inflRate = $("input[ng-model='pension.inflationRate']");
-	var inflType = $("select[ng-model='pension.inflationType']");
+	var inflRate = $('input[name^=pensionInflationRate]').map(function(idx, elem) {
+		return parseFloat($(elem).val());
+	}).get();
+	var inflType = $('select[name^=pensionInflationType]').map(function(idx, elem) {
+		return elem.value;
+	}).get();
 	var yearsTrigger = true, rateTrigger = true, valueTrigger = true;
 	for (var i = 0; i < startYears.length; i++) {
 		if ((startYears[i] < simulationStartYear) || (isNaN(startYears[i]))) {
@@ -232,7 +236,7 @@ function cmpPensions() {
 		}
 	}
 	for (var i = 0; i < inflRate.length; i++) {
-		if (((parseFloat(inflRate[i].value) < 0) || (isNaN(parseFloat(inflRate[i].value)))) && inflType[i].value == 1) {
+		if (((inflRate[i] < 0) || (isNaN(inflRate[i]))) && inflType[i] == "string:constant") {
 			rateTrigger = false;
 		}
 	}
@@ -259,16 +263,16 @@ function cmpPensions() {
 	}
 }
 
-$(document).on("keyup", "input[ng-model='pension.startYear']", function() {
+$(document).on("keyup", "input[name^=pensionYear]", function() {
 	cmpPensions();
 });
-$(document).on("keyup", "input[ng-model='pension.inflationRate']", function() {
+$(document).on("keyup", "input[name^=pensionInflationRate]", function() {
 	cmpPensions();
 });
-$(document).on("keyup", "input[ng-model='pension.val']", function() {
+$(document).on("keyup", "input[name^=pensionAmount]", function() {
 	cmpPensions();
 });
-$(document).on('change',"select[ng-model='pension.inflationType']",  function() {
+$(document).on('change',"select[name^=pensionInflationType]",  function() {
 	cmpPensions();
 });
 
