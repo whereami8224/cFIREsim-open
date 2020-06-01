@@ -277,7 +277,7 @@
                 <div class="col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Basics
+                            Timeframe
                         </div>
                         <div class="panel-body">
                             <div class="alert alert-danger" role="alert" id="yearsError" style="display:none">
@@ -410,7 +410,12 @@
                                 <span class="sr-only">Error:</span>
                                 Portfolio must be a positive number.
                             </div>
-                            <label>Portfolio Value:<input type="number" class="form-control" ng-model="data.portfolio.initial"></label>
+                            <label>Portfolio Value:
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="number" class="form-control" ng-model="data.portfolio.initial">
+                                </div>
+                            </label>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Initial Assets
@@ -815,7 +820,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Extra Income/Savings
+                            Income
                         </div>
                         <div class="panel-body">
                             <div class="panel panel-default">
@@ -834,7 +839,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>
-                                                Annual:
+                                                Annual Amount:
                                                 <div class="input-group">
                                                     <span class="input-group-addon">$</span>
                                                     <input type="text" class="form-control" ng-model="data.extraIncome.socialSecurity.val">
@@ -851,7 +856,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>
-                                                Annual Spousal:
+                                                Annual Spousal Amount:
                                                 <div class="input-group">
                                                     <span class="input-group-addon">$</span>
                                                     <input type="text" class="form-control" ng-model="data.extraIncome.socialSecuritySpouse.val">
@@ -891,7 +896,7 @@
                                                     Label
                                                 </th>
                                                 <th id="p_amount">
-                                                    Amount ($)
+                                                    Annual Amount
                                                 </th>
                                                 <th id="p_year">
                                                     Start Year
@@ -903,7 +908,7 @@
                                                     Inflation Type
                                                 </th>
                                                 <th id="p_infrate">
-                                                    Inflation %
+                                                    Inflation Rate
                                                 </th>
                                                 <th>
                                                 </th>
@@ -915,7 +920,10 @@
                                                     <input type="text" class="form-control" ng-model="pension.label" aria-labelledby="p_label">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="pension.val" aria-labelledby="p_amount">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control" ng-model="pension.val" aria-labelledby="p_amount">
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <input type="text" class="form-control" ng-model="pension.startYear" aria-labelledby="p_amount">
@@ -936,11 +944,14 @@
                                                             aria-labelledby="p_inftyp"></select>
                                                 </td>
                                                 <td>
-                                                    <input type="text"
+                                                    <div class="input-group">
+                                                        <input type="text"
                                                            class="form-control"
                                                            ng-model="pension.inflationRate"
                                                            ng-disabled="pension.inflationType != 'constant' || !pension.inflationAdjusted"
                                                            aria-labelledby="p_infrate">
+                                                        <span class="input-group-addon">%</span>
+                                                        </div>
                                                 </td>
                                                 <td>
                                                     <input type="button" ng-click="removeObject($index, data.extraIncome.pensions)" value="Delete" />
@@ -975,7 +986,7 @@
                                                     Label
                                                 </th>
                                                 <th id="i_amount">
-                                                    Amount ($)
+                                                    Annual Amount
                                                 </th>
                                                 <th id="i_type">
                                                     Recurring
@@ -993,7 +1004,7 @@
                                                     Inflation Type
                                                 </th>
                                                 <th id="i_infrate">
-                                                    Inflation %
+                                                    Inflation Rate
                                                 </th>
                                                 <th>
                                                 </th>
@@ -1005,7 +1016,10 @@
                                                     <input type="text" class="form-control" ng-model="extraSaving.label" aria-labelledby="i_label">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSaving.val" aria-labelledby="i_amount">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control" ng-model="extraSaving.val" aria-labelledby="i_amount">
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
@@ -1040,11 +1054,14 @@
                                                             aria-labelledby="i_inftyp"></select>
                                                 </td>
                                                 <td>
+                                                    <div class="input-group">
                                                     <input type="text"
                                                            class="form-control"
                                                            ng-model="extraSaving.inflationRate"
                                                            ng-disabled="extraSaving.inflationType != 'constant' || !extraSaving.inflationAdjusted"
                                                            aria-labelledby="i_infrate">
+                                                    <span class="input-group-addon">%</span>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <input type="button" ng-click="removeObject($index, data.extraIncome.extraSavings)" value="Delete" />
@@ -1061,13 +1078,10 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Extra Spending
+                            Individual Expenses
                         </div>
                         <div class="panel-body">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Other Spending
-                                </div>
                                 <div class="alert alert-danger" role="alert" id="extraSpendingError" style="display:none">
                                     <span class="sr-only">Error:</span>
                                     Start Year must be &gt;= current year. Start Year must be less than End Year.
@@ -1088,7 +1102,7 @@
                                                     Label
                                                 </th>
                                                 <th id="s_amount">
-                                                    Amount ($)
+                                                    Annual Amount
                                                 </th>
                                                 <th id="s_type">
                                                     Recurring
@@ -1106,7 +1120,7 @@
                                                     Inflation Type
                                                 </th>
                                                 <th id="s_infrate">
-                                                    Inflation %
+                                                    Inflation Rate
                                                 </th>
                                                 <th>
                                                 </th>
@@ -1118,7 +1132,10 @@
                                                     <input type="text" class="form-control" ng-model="extraSpending.label" aria-labelledby="s_label">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" ng-model="extraSpending.val" aria-labelledby="s_amount">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" class="form-control" ng-model="extraSpending.val" aria-labelledby="s_amount">
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <select class="form-control"
@@ -1156,11 +1173,14 @@
                                                             aria-labelledby="s_inftyp"></select>
                                                 </td>
                                                 <td>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           ng-model="extraSpending.inflationRate"
-                                                           ng-disabled="extraSpending.inflationType != 'constant' || !extraSpending.inflationAdjusted"
-                                                           aria-labelledby="s_infrate">
+                                                    <div class="input-group">
+                                                        <input type="text"
+                                                            class="form-control"
+                                                            ng-model="extraSpending.inflationRate"
+                                                            ng-disabled="extraSpending.inflationType != 'constant' || !extraSpending.inflationAdjusted"
+                                                            aria-labelledby="s_infrate">
+                                                        <span class="input-group-addon">%</span>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <input type="button" ng-click="removeObject($index, data.extraSpending)" value="Delete" />
